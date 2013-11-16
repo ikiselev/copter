@@ -1,4 +1,0 @@
-copter
-======
-
-Copter Stabilize System
