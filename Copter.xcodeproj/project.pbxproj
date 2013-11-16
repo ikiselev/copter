@@ -552,6 +552,7 @@
 		ABA59A0259A2B6FBC2BB16B7 /* GSM3ShieldV1ClientProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSM3ShieldV1ClientProvider.h; sourceTree = "<group>"; };
 		ABA59A15FC22C7BFE3F12223 /* EsploraTFTGraph.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = EsploraTFTGraph.ino; sourceTree = "<group>"; };
 		ABA59A180571F7239EC27CCB /* MakeVoiceCall.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = MakeVoiceCall.ino; sourceTree = "<group>"; };
+		ABA59A196542E56771B907D3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = file.md; path = README.md; sourceTree = "<group>"; };
 		ABA59A325275A5F89EFE2246 /* StandardFirmata.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = StandardFirmata.ino; sourceTree = "<group>"; };
 		ABA59A41A1525C9671B1E792 /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		ABA59A441955638116A63EAB /* SimpleDigitalFirmata.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = SimpleDigitalFirmata.ino; sourceTree = "<group>"; };
@@ -1721,6 +1722,7 @@
 				ABA59330A4AF6925B48ADF19 /* Copter.ino */,
 				ABA59F7DCBDCD1458194D07E /* Libraries */,
 				ABA59FF846AEEB43DC4B9F87 /* Makefile */,
+				ABA59A196542E56771B907D3 /* README.md */,
 			);
 			path = Copter;
 			sourceTree = "<group>";
