@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>9982663F-46BE-4070-88E7-7F8D2738FC46</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Copter</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>438A309B-7015-488C-96FC-C0A55EB12F9B</key>
+		<string>https://github.com/ikiselev/copter.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Copter.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>438A309B-7015-488C-96FC-C0A55EB12F9B</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ikiselev/copter.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>438A309B-7015-488C-96FC-C0A55EB12F9B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>438A309B-7015-488C-96FC-C0A55EB12F9B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Copter</string>
+		</dict>
+	</array>
+</dict>
+</plist>

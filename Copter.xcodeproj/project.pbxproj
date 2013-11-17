@@ -16,7 +16,6 @@
 		ABA590F4A185166CCC72BB74 /* Multiplexer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA59AC6D69BE19583E21F2F /* Multiplexer.cpp */; };
 		ABA5910534EA1C66A7C63AF8 /* GSM3ShieldV1ServerProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA59CAB4816E4923CDC5CBC /* GSM3ShieldV1ServerProvider.cpp */; };
 		ABA59108A5ECF89A577EC13D /* GSM3MobileNetworkRegistry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA5953BD02FFD1347E73D7B /* GSM3MobileNetworkRegistry.cpp */; };
-		ABA591197F180EB7492CB61D /* LSM303.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA594D8B99635EDA1D247DC /* LSM303.cpp */; };
 		ABA591207B4828719D6BE205 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = ABA595D8F33521AB7E1F2892 /* Makefile */; };
 		ABA591220A30B82C4A63116F /* HID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA59609F910B9733C450BAF /* HID.cpp */; };
 		ABA59124BE5D48AC35C7F01F /* Descriptors.c in Sources */ = {isa = PBXBuildFile; fileRef = ABA592E45EED706689D708E4 /* Descriptors.c */; };
@@ -106,7 +105,6 @@
 		ABA598916E9D39A2C09B847F /* USBCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA59D863A6E36FA5B5BB7EF /* USBCore.cpp */; };
 		ABA598E1B2365DCEC61C1C5D /* HardwareSerial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA5960564BC53C1C62323DD /* HardwareSerial.cpp */; };
 		ABA598F350F29B1616E88FE1 /* lineFollow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA5995AFD2C9E2A1A19D993 /* lineFollow.cpp */; };
-		ABA5993CE832928D37E4F4DE /* L3G.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA59110D1BF25C1C315381A /* L3G.cpp */; };
 		ABA59965A004F2041A207B7E /* Dhcp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA59B5A1A55987F5234485A /* Dhcp.cpp */; };
 		ABA5998AB5815B4B38F863A2 /* wiring_shift.c in Sources */ = {isa = PBXBuildFile; fileRef = ABA599C90AA7CED56B8290B1 /* wiring_shift.c */; };
 		ABA5998DEC0EFEF80ABF7F3F /* WInterrupts.c in Sources */ = {isa = PBXBuildFile; fileRef = ABA59DC33E5A47A72274EC77 /* WInterrupts.c */; };
@@ -133,7 +131,6 @@
 		ABA59B30F35ECDDE0FF3BFFC /* Arduino_LCD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA59E1CE0D7EEDF86128354 /* Arduino_LCD.cpp */; };
 		ABA59B4E62A51DA891671C0C /* Adafruit_GFX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA593AE627F9F129442D034 /* Adafruit_GFX.cpp */; };
 		ABA59BA29F5438FBE02E37CB /* GSM3MobileVoiceProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA5900EA8B4BB7CBD2A3A7F /* GSM3MobileVoiceProvider.cpp */; };
-		ABA59BB874DF9DE75E149E29 /* PID_v1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA59C56193D5138185ABEA1 /* PID_v1.cpp */; };
 		ABA59BC70D9B28394B3D54CA /* socket.c in Sources */ = {isa = PBXBuildFile; fileRef = ABA596BFBBC6F51D490A292D /* socket.c */; };
 		ABA59BC81FBD7BF764FCB710 /* EthernetServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA5932BF12C424C3E49046C /* EthernetServer.cpp */; };
 		ABA59BC924D9D017EB9D9C8E /* malloc.c in Sources */ = {isa = PBXBuildFile; fileRef = ABA59EC26B546B01D8FE0E42 /* malloc.c */; };
@@ -182,7 +179,6 @@
 		ABA5900D3D1604A6EC533565 /* R10_Rescue.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = R10_Rescue.ino; sourceTree = "<group>"; };
 		ABA5900DFFA89F1AD63018C0 /* GSM3MobileServerProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSM3MobileServerProvider.h; sourceTree = "<group>"; };
 		ABA5900EA8B4BB7CBD2A3A7F /* GSM3MobileVoiceProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GSM3MobileVoiceProvider.cpp; sourceTree = "<group>"; };
-		ABA59016A3958A19521685B1 /* Serial.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = Serial.ino; sourceTree = "<group>"; };
 		ABA59026BC16F0E3983C9D30 /* Caterina-LilyPadUSB.hex */ = {isa = PBXFileReference; lastKnownFileType = file.hex; path = "Caterina-LilyPadUSB.hex"; sourceTree = "<group>"; };
 		ABA59032D3D2502279E84D8F /* WString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WString.cpp; sourceTree = "<group>"; };
 		ABA59036E867BC6CABBB5727 /* Arduino-COMBINED-dfu-usbserial-atmega16u2-Mega2560-Rev3.hex */ = {isa = PBXFileReference; lastKnownFileType = file.hex; path = "Arduino-COMBINED-dfu-usbserial-atmega16u2-Mega2560-Rev3.hex"; sourceTree = "<group>"; };
@@ -213,7 +209,6 @@
 		ABA590F9DB4BC487BDB47F79 /* GSM3MobileServerService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GSM3MobileServerService.cpp; sourceTree = "<group>"; };
 		ABA590FD4818F3396EF9F321 /* WMath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WMath.cpp; sourceTree = "<group>"; };
 		ABA591079E02A1D3FBCC0C2A /* SPI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SPI.cpp; sourceTree = "<group>"; };
-		ABA59110D1BF25C1C315381A /* L3G.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = L3G.cpp; sourceTree = "<group>"; };
 		ABA591172821A35767E398F7 /* w5100.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = w5100.h; sourceTree = "<group>"; };
 		ABA5911F373C4984871BD1C3 /* R08_Remote_Control.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = R08_Remote_Control.ino; sourceTree = "<group>"; };
 		ABA59121BF1C33AEFF14D232 /* wiring_digital.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wiring_digital.c; sourceTree = "<group>"; };
@@ -286,7 +281,6 @@
 		ABA592EEEACF3C51B0E40236 /* Descriptors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Descriptors.h; sourceTree = "<group>"; };
 		ABA592EF2A6B406549361E2A /* CDC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CDC.cpp; sourceTree = "<group>"; };
 		ABA592F60C0EF310B8C20AD5 /* twi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = twi.c; sourceTree = "<group>"; };
-		ABA59303803D1534EA3C26AA /* PID_v1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PID_v1.h; sourceTree = "<group>"; };
 		ABA59304EA501512FEC914FA /* binary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = binary.h; sourceTree = "<group>"; };
 		ABA5930A9777310016CAB45F /* Leonardo-prod-firmware-2012-04-26.hex */ = {isa = PBXFileReference; lastKnownFileType = file.hex; path = "Leonardo-prod-firmware-2012-04-26.hex"; sourceTree = "<group>"; };
 		ABA593199CF164A08C624B1D /* GsmWebClient.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = GsmWebClient.ino; sourceTree = "<group>"; };
@@ -313,7 +307,6 @@
 		ABA593CF537D1AAB942FAD94 /* Micro-prod-firmware-2012-12-10.hex */ = {isa = PBXFileReference; lastKnownFileType = file.hex; path = "Micro-prod-firmware-2012-12-10.hex"; sourceTree = "<group>"; };
 		ABA593D055E0819F17F1F860 /* ATmegaBOOT_168_atmega328.hex */ = {isa = PBXFileReference; lastKnownFileType = file.hex; path = ATmegaBOOT_168_atmega328.hex; sourceTree = "<group>"; };
 		ABA593F11EAFE02D86B2BFEA /* SD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SD.h; sourceTree = "<group>"; };
-		ABA593F5DAF8D24F83512094 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
 		ABA593F85E75B3582BB77485 /* Fat16Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fat16Config.h; sourceTree = "<group>"; };
 		ABA5940A7C607838E8477CCF /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		ABA594149E0E6FBB321B44AB /* EthernetClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EthernetClient.cpp; sourceTree = "<group>"; };
@@ -343,7 +336,6 @@
 		ABA594D53ADC142EC9F0EE3D /* slave_sender.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = slave_sender.ino; sourceTree = "<group>"; };
 		ABA594D7C43057AA4FAFDF45 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		ABA594D7E7DF89DF5D9C075F /* Dhcp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dhcp.h; sourceTree = "<group>"; };
-		ABA594D8B99635EDA1D247DC /* LSM303.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LSM303.cpp; sourceTree = "<group>"; };
 		ABA594FDFE3B0D747E15B0A3 /* USBCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USBCore.cpp; sourceTree = "<group>"; };
 		ABA5950E01734BCD0A235BC4 /* DhcpAddressPrinter.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = DhcpAddressPrinter.ino; sourceTree = "<group>"; };
 		ABA5951343526699C4694751 /* server_drv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = server_drv.cpp; sourceTree = "<group>"; };
@@ -369,7 +361,6 @@
 		ABA595814CD641CDAB0CD086 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
 		ABA595841FDC025390882578 /* SquawkSD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SquawkSD.cpp; sourceTree = "<group>"; };
 		ABA595842548E237B40A1017 /* pins_arduino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pins_arduino.h; sourceTree = "<group>"; };
-		ABA5958F1F72CE169A01B216 /* PID_Basic.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = PID_Basic.ino; sourceTree = "<group>"; };
 		ABA59591BD6E60CB885C719E /* GSM3MobileSMSProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSM3MobileSMSProvider.h; sourceTree = "<group>"; };
 		ABA59597D61C215507248FCE /* arduino.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = arduino.bmp; sourceTree = "<group>"; };
 		ABA59598B8A26A8DFEBE6A54 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
@@ -387,7 +378,6 @@
 		ABA595E243989CE8C9378517 /* SdCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SdCard.h; sourceTree = "<group>"; };
 		ABA595E543C6288151CFF4D1 /* EsploraBlink.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = EsploraBlink.ino; sourceTree = "<group>"; };
 		ABA595E61AF1E68A3B990F8D /* STK500V2.pnps */ = {isa = PBXFileReference; lastKnownFileType = file.pnps; path = STK500V2.pnps; sourceTree = "<group>"; };
-		ABA595EAA5FF17249E2623CD /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
 		ABA595EC80991A0E231A066F /* GSM3ShieldV1ModemCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GSM3ShieldV1ModemCore.cpp; sourceTree = "<group>"; };
 		ABA595EC8B7F9CA0E77A8059 /* EsploraKart.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = EsploraKart.ino; sourceTree = "<group>"; };
 		ABA595EE55AB208903487265 /* wiring_pulse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wiring_pulse.c; sourceTree = "<group>"; };
@@ -395,7 +385,6 @@
 		ABA595F499F4661AF0909BA1 /* OldStandardFirmata.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = OldStandardFirmata.ino; sourceTree = "<group>"; };
 		ABA595F68044910D6D8DB40E /* Esplora-prod-firmware-2012-12-10.hex */ = {isa = PBXFileReference; lastKnownFileType = file.hex; path = "Esplora-prod-firmware-2012-12-10.hex"; sourceTree = "<group>"; };
 		ABA595FE8D4D49D17EBF73C1 /* EthernetUdp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EthernetUdp.cpp; sourceTree = "<group>"; };
-		ABA595FEFEF49D0AD453A215 /* Calibrate.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = Calibrate.ino; sourceTree = "<group>"; };
 		ABA5960564BC53C1C62323DD /* HardwareSerial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HardwareSerial.cpp; sourceTree = "<group>"; };
 		ABA596075613D79C38A0E88E /* EsploraTFTColorPicker.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = EsploraTFTColorPicker.ino; sourceTree = "<group>"; };
 		ABA596079DF92839BA871684 /* GSM3MobileClientService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSM3MobileClientService.h; sourceTree = "<group>"; };
@@ -442,7 +431,6 @@
 		ABA5973189AD0C0830C2C9B2 /* R09_Picture_Browser.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = R09_Picture_Browser.ino; sourceTree = "<group>"; };
 		ABA597363F92326ABA18AB08 /* GSM3MobileMockupProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GSM3MobileMockupProvider.cpp; sourceTree = "<group>"; };
 		ABA59739810FC190E055366A /* GSM3ShieldV1MultiServerProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GSM3ShieldV1MultiServerProvider.cpp; sourceTree = "<group>"; };
-		ABA5973A0A1993E369A3AE79 /* LSM303.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSM303.h; sourceTree = "<group>"; };
 		ABA5973F0B87154A2B8491CD /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
 		ABA597420F856D5A2423688E /* keyboardTest.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = keyboardTest.ino; sourceTree = "<group>"; };
 		ABA59742A37A3104048FA83E /* BarometricPressureSensor.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = BarometricPressureSensor.ino; sourceTree = "<group>"; };
@@ -482,14 +470,12 @@
 		ABA597DD7632E3D07191EACF /* setCursor.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = setCursor.ino; sourceTree = "<group>"; };
 		ABA597DDECCEE543A7AB7703 /* PachubeClientString.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = PachubeClientString.ino; sourceTree = "<group>"; };
 		ABA597E1A5729EF719606B4A /* realloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = realloc.c; sourceTree = "<group>"; };
-		ABA597E8494D6FC0A498DF25 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
 		ABA597EF8AB21C9F46A8E8CA /* GSM3MobileAccessProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSM3MobileAccessProvider.h; sourceTree = "<group>"; };
 		ABA597F6A5FA9A3D4B749FE3 /* Wire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wire.h; sourceTree = "<group>"; };
 		ABA597F7E9D0A4D75477424B /* VirtualKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualKeyboard.h; sourceTree = "<group>"; };
 		ABA597FDFD9C866EF9309C41 /* optiboot_atmega168.hex */ = {isa = PBXFileReference; lastKnownFileType = file.hex; path = optiboot_atmega168.hex; sourceTree = "<group>"; };
 		ABA597FE28EF2348C8C90109 /* socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = socket.cpp; sourceTree = "<group>"; };
 		ABA5980BC1F358B5446CE085 /* pins_arduino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pins_arduino.h; sourceTree = "<group>"; };
-		ABA5980C551B71D14E974FD4 /* L3G.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L3G.h; sourceTree = "<group>"; };
 		ABA5981A30ACD0599184A882 /* Compass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compass.h; sourceTree = "<group>"; };
 		ABA5982EB97310CD46F34EEF /* HardwareSerial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HardwareSerial.h; sourceTree = "<group>"; };
 		ABA5983A4886F1C3D85F58E2 /* TwoPortReceive.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = TwoPortReceive.ino; sourceTree = "<group>"; };
@@ -570,6 +556,7 @@
 		ABA59AB2AC873599015BC8C5 /* twi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twi.h; sourceTree = "<group>"; };
 		ABA59AB4599E59E67BEB6AFB /* WiFiServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiServer.h; sourceTree = "<group>"; };
 		ABA59AC6D69BE19583E21F2F /* Multiplexer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Multiplexer.cpp; sourceTree = "<group>"; };
+		ABA59AD3D41AC40FFA8B8897 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = file.md; name = README.md; path = Libraries/README.md; sourceTree = "<group>"; };
 		ABA59AD68EEC02C89E265BBD /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		ABA59ADDECAE1EA8804CCB5B /* GSM3ShieldV1SMSProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GSM3ShieldV1SMSProvider.cpp; sourceTree = "<group>"; };
 		ABA59AE3F99023C924EB98DE /* stdlib_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdlib_private.h; sourceTree = "<group>"; };
@@ -592,7 +579,6 @@
 		ABA59B82B76345F2113661F1 /* GSM3ShieldV1DataNetworkProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSM3ShieldV1DataNetworkProvider.h; sourceTree = "<group>"; };
 		ABA59B8A1CAEAD0663787BB4 /* Multiplexer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Multiplexer.cpp; sourceTree = "<group>"; };
 		ABA59B8D0E548E132BDF9965 /* MotorKnob.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = MotorKnob.ino; sourceTree = "<group>"; };
-		ABA59B90ADD41849F6AAA0EA /* Serial.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = Serial.ino; sourceTree = "<group>"; };
 		ABA59B9308850621BE4B175B /* GSM3ShieldV1BandManagement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GSM3ShieldV1BandManagement.cpp; sourceTree = "<group>"; };
 		ABA59B9801A1DC4F7D659158 /* BarometricPressureSensor.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = BarometricPressureSensor.ino; sourceTree = "<group>"; };
 		ABA59B9DED4C320A96356CD5 /* Display.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = Display.ino; sourceTree = "<group>"; };
@@ -616,7 +602,6 @@
 		ABA59C0F074E3CE1BADF1D9D /* Arduino-usbserial-atmega16u2-Uno-Rev3.hex */ = {isa = PBXFileReference; lastKnownFileType = file.hex; path = "Arduino-usbserial-atmega16u2-Uno-Rev3.hex"; sourceTree = "<group>"; };
 		ABA59C10CB875193D77660C1 /* GSM3ShieldV1MultiServerProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSM3ShieldV1MultiServerProvider.h; sourceTree = "<group>"; };
 		ABA59C1D7FCDEA66710F0714 /* binary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = binary.h; sourceTree = "<group>"; };
-		ABA59C1E36130DD6D510C908 /* PID_AdaptiveTunings.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = PID_AdaptiveTunings.ino; sourceTree = "<group>"; };
 		ABA59C23D92F0E91EE16EF23 /* eeprom_read.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = eeprom_read.ino; sourceTree = "<group>"; };
 		ABA59C263722DEBDF688362D /* GSM3ShieldV1ClientProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GSM3ShieldV1ClientProvider.cpp; sourceTree = "<group>"; };
 		ABA59C2A9FDFE5FF922A135A /* pins_arduino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pins_arduino.h; sourceTree = "<group>"; };
@@ -624,7 +609,6 @@
 		ABA59C3EA85B963EE984CF85 /* debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
 		ABA59C496A5C112606FE2373 /* UNO-dfu_and_usbserial_combined.hex */ = {isa = PBXFileReference; lastKnownFileType = file.hex; path = "UNO-dfu_and_usbserial_combined.hex"; sourceTree = "<group>"; };
 		ABA59C53B03E157C0A3CE131 /* Micro-prod-firmware-2012-11-23.hex */ = {isa = PBXFileReference; lastKnownFileType = file.hex; path = "Micro-prod-firmware-2012-11-23.hex"; sourceTree = "<group>"; };
-		ABA59C56193D5138185ABEA1 /* PID_v1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PID_v1.cpp; sourceTree = "<group>"; };
 		ABA59C5EF9004C9B161BE5DC /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		ABA59C616C647DE8595F4486 /* GSM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSM.h; sourceTree = "<group>"; };
 		ABA59C79B0A41B22411569B8 /* TurnTest.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = TurnTest.ino; sourceTree = "<group>"; };
@@ -632,7 +616,6 @@
 		ABA59C80FD0AFF7B79073F30 /* Stepper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stepper.cpp; sourceTree = "<group>"; };
 		ABA59C8544466BFFDFD86D22 /* WiFiUdp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiUdp.h; sourceTree = "<group>"; };
 		ABA59C87918F22ECF6F15438 /* wifi_drv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wifi_drv.h; sourceTree = "<group>"; };
-		ABA59C9BD2952C361C7A1279 /* README.textile */ = {isa = PBXFileReference; lastKnownFileType = file.textile; path = README.textile; sourceTree = "<group>"; };
 		ABA59CA5A86236B23F16ADF2 /* optiboot_atmega328.lst */ = {isa = PBXFileReference; lastKnownFileType = file.lst; path = optiboot_atmega328.lst; sourceTree = "<group>"; };
 		ABA59CAB4816E4923CDC5CBC /* GSM3ShieldV1ServerProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GSM3ShieldV1ServerProvider.cpp; sourceTree = "<group>"; };
 		ABA59CD24550C5C8A5C2F3B0 /* Files.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = Files.ino; sourceTree = "<group>"; };
@@ -657,8 +640,6 @@
 		ABA59D4550B09996ECC5A35C /* WiFiUdpNtpClient.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = WiFiUdpNtpClient.ino; sourceTree = "<group>"; };
 		ABA59D45A0A486AF9337BDD6 /* EsploraPong.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = EsploraPong.ino; sourceTree = "<group>"; };
 		ABA59D4CF1B48ABA3D343D60 /* SdInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SdInfo.h; sourceTree = "<group>"; };
-		ABA59D598099CDEC5B7CCC0F /* PID_RelayOutput.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = PID_RelayOutput.ino; sourceTree = "<group>"; };
-		ABA59D5AA5861ED4F4F07B92 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = file.md; name = README.md; path = Libraries/README.md; sourceTree = "<group>"; };
 		ABA59D5ACB0859A1BCC4170C /* GSM3ShieldV1ModemVerification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GSM3ShieldV1ModemVerification.cpp; sourceTree = "<group>"; };
 		ABA59D5CEA21E560E31F1017 /* USBAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USBAPI.h; sourceTree = "<group>"; };
 		ABA59D66B7A7D865F4F168D0 /* Compass.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = Compass.ino; sourceTree = "<group>"; };
@@ -714,7 +695,6 @@
 		ABA59EC145D93D9A5579060D /* Printable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Printable.h; sourceTree = "<group>"; };
 		ABA59EC26B546B01D8FE0E42 /* malloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = malloc.c; sourceTree = "<group>"; };
 		ABA59EC6FBDAF1E9C12B8A78 /* TFTDisplayText.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = TFTDisplayText.ino; sourceTree = "<group>"; };
-		ABA59EE1657453061AA165BA /* Heading.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = Heading.ino; sourceTree = "<group>"; };
 		ABA59EE73A5F6264BC038CCA /* SdCard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SdCard.cpp; sourceTree = "<group>"; };
 		ABA59EE962335D37315B8C5A /* new.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = new.cpp; sourceTree = "<group>"; };
 		ABA59EF94C8B0AF205FFE2E6 /* Boards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boards.h; sourceTree = "<group>"; };
@@ -732,7 +712,6 @@
 		ABA59F358488345FA26DEEBA /* ReceiveSMS.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = ReceiveSMS.ino; sourceTree = "<group>"; };
 		ABA59F41B1ABE5008698B376 /* optiboot_atmega328-Mini.hex */ = {isa = PBXFileReference; lastKnownFileType = file.hex; path = "optiboot_atmega328-Mini.hex"; sourceTree = "<group>"; };
 		ABA59F49162B2B58C2CB6ECE /* GSM3ShieldV1VoiceProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GSM3ShieldV1VoiceProvider.cpp; sourceTree = "<group>"; };
-		ABA59F4C0C2BDEB79A729860 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		ABA59F510DF9165FDC45F2E9 /* GSM3ShieldV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSM3ShieldV1.h; sourceTree = "<group>"; };
 		ABA59F511B4AA00AE53D4584 /* Print.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Print.cpp; sourceTree = "<group>"; };
 		ABA59F544240D1C6AE83C9A8 /* SdInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SdInfo.h; sourceTree = "<group>"; };
@@ -764,6 +743,30 @@
 		ABA59FE38B3F6D679697B73C /* TestGPRS.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = TestGPRS.ino; sourceTree = "<group>"; };
 		ABA59FEE6FDFF01E4F0445C8 /* programmers.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = programmers.txt; sourceTree = "<group>"; };
 		ABA59FF846AEEB43DC4B9F87 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		D1024AA91838F0F600744609 /* bma180.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bma180.cpp; sourceTree = "<group>"; };
+		D1024AAA1838F0F600744609 /* bma180.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bma180.h; sourceTree = "<group>"; };
+		D1024AAD1838F0F600744609 /* isr_read.pde */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = isr_read.pde; sourceTree = "<group>"; };
+		D1024AAF1838F0F600744609 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
+		D1024AB11838F0F600744609 /* bma180i.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bma180i.cpp; sourceTree = "<group>"; };
+		D1024AB21838F0F600744609 /* bma180i.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bma180i.h; sourceTree = "<group>"; };
+		D1024AB61838F0F600744609 /* Serial.ino */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Serial.ino; sourceTree = "<group>"; };
+		D1024AB71838F0F600744609 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
+		D1024AB81838F0F600744609 /* L3G.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = L3G.cpp; sourceTree = "<group>"; };
+		D1024AB91838F0F600744609 /* L3G.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L3G.h; sourceTree = "<group>"; };
+		D1024ABB1838F0F600744609 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		D1024ABF1838F0F600744609 /* Calibrate.ino */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Calibrate.ino; sourceTree = "<group>"; };
+		D1024AC11838F0F600744609 /* Heading.ino */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Heading.ino; sourceTree = "<group>"; };
+		D1024AC31838F0F600744609 /* Serial.ino */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Serial.ino; sourceTree = "<group>"; };
+		D1024AC41838F0F600744609 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
+		D1024AC51838F0F600744609 /* LSM303.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LSM303.cpp; sourceTree = "<group>"; };
+		D1024AC61838F0F600744609 /* LSM303.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSM303.h; sourceTree = "<group>"; };
+		D1024AC71838F0F600744609 /* README.textile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.textile; sourceTree = "<group>"; };
+		D1024ACB1838F0F600744609 /* PID_AdaptiveTunings.ino */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PID_AdaptiveTunings.ino; sourceTree = "<group>"; };
+		D1024ACD1838F0F600744609 /* PID_Basic.ino */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PID_Basic.ino; sourceTree = "<group>"; };
+		D1024ACF1838F0F600744609 /* PID_RelayOutput.ino */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PID_RelayOutput.ino; sourceTree = "<group>"; };
+		D1024AD01838F0F600744609 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
+		D1024AD11838F0F600744609 /* PID_v1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PID_v1.cpp; sourceTree = "<group>"; };
+		D1024AD21838F0F600744609 /* PID_v1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PID_v1.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -801,27 +804,11 @@
 			path = LCDPrint;
 			sourceTree = "<group>";
 		};
-		ABA5902D9A34165004F79BB7 /* PID_AdaptiveTunings */ = {
-			isa = PBXGroup;
-			children = (
-				ABA59C1E36130DD6D510C908 /* PID_AdaptiveTunings.ino */,
-			);
-			path = PID_AdaptiveTunings;
-			sourceTree = "<group>";
-		};
 		ABA5903470C8AA2E20711C0C /* examples */ = {
 			isa = PBXGroup;
 			children = (
 				ABA59697BAC2CCA1AED20498 /* Arduino */,
 				ABA59B00D1E06995E52C0E40 /* Esplora */,
-			);
-			path = examples;
-			sourceTree = "<group>";
-		};
-		ABA59044E4A288CEDA2719E7 /* examples */ = {
-			isa = PBXGroup;
-			children = (
-				ABA594197E4E848FAC62F770 /* Serial */,
 			);
 			path = examples;
 			sourceTree = "<group>";
@@ -1451,14 +1438,6 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		ABA594197E4E848FAC62F770 /* Serial */ = {
-			isa = PBXGroup;
-			children = (
-				ABA59B90ADD41849F6AAA0EA /* Serial.ino */,
-			);
-			path = Serial;
-			sourceTree = "<group>";
-		};
 		ABA5943592A46961EEDED42B /* SpeedByPotentiometer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1481,6 +1460,14 @@
 				ABA598673A5B9C29BA8EFE4C /* EsploraLightCalibrator.ino */,
 			);
 			path = EsploraLightCalibrator;
+			sourceTree = "<group>";
+		};
+		ABA5945BF83008FD8977BDC3 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				ABA59AD3D41AC40FFA8B8897 /* README.md */,
+			);
+			name = Libraries;
 			sourceTree = "<group>";
 		};
 		ABA5947AF494546A51E63B34 /* SimpleWebServerWiFi */ = {
@@ -1617,17 +1604,6 @@
 			path = BarometricPressureSensor;
 			sourceTree = "<group>";
 		};
-		ABA595730DDBFF468CBB7D82 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				ABA59B7DCF18D19C0A7B983E /* L3G */,
-				ABA595ACC2767119E0BFFA7E /* LSM303 */,
-				ABA59E4D8350916574842E9C /* PID_v1 */,
-			);
-			name = Libraries;
-			path = ../../Libraries;
-			sourceTree = "<group>";
-		};
 		ABA5957EBFAD73865101E1DA /* utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -1642,16 +1618,6 @@
 				ABA597BD54CCBA76255C939F /* Adafruit-license.txt */,
 			);
 			path = utility;
-			sourceTree = "<group>";
-		};
-		ABA595ACC2767119E0BFFA7E /* LSM303 */ = {
-			isa = PBXGroup;
-			children = (
-				ABA5971FBCDD2B17A9028F42 /* LSM303 */,
-				ABA59F4C0C2BDEB79A729860 /* LICENSE.txt */,
-				ABA59C9BD2952C361C7A1279 /* README.textile */,
-			);
-			path = LSM303;
 			sourceTree = "<group>";
 		};
 		ABA595B447F96C4BAC24EEF5 /* Datalogger */ = {
@@ -1720,9 +1686,9 @@
 			isa = PBXGroup;
 			children = (
 				ABA59330A4AF6925B48ADF19 /* Copter.ino */,
-				ABA59F7DCBDCD1458194D07E /* Libraries */,
 				ABA59FF846AEEB43DC4B9F87 /* Makefile */,
 				ABA59A196542E56771B907D3 /* README.md */,
+				ABA5945BF83008FD8977BDC3 /* Libraries */,
 			);
 			path = Copter;
 			sourceTree = "<group>";
@@ -1850,31 +1816,12 @@
 			path = bootloaders;
 			sourceTree = "<group>";
 		};
-		ABA5970ECE11550D14A224D5 /* Heading */ = {
-			isa = PBXGroup;
-			children = (
-				ABA59EE1657453061AA165BA /* Heading.ino */,
-			);
-			path = Heading;
-			sourceTree = "<group>";
-		};
 		ABA597118C0C9F2C8AE2008B /* firmwares */ = {
 			isa = PBXGroup;
 			children = (
 				ABA59B99A3D1A325D50C44FB /* atmegaxxu2 */,
 			);
 			path = firmwares;
-			sourceTree = "<group>";
-		};
-		ABA5971FBCDD2B17A9028F42 /* LSM303 */ = {
-			isa = PBXGroup;
-			children = (
-				ABA59E015E9853EEE3915A89 /* examples */,
-				ABA5973A0A1993E369A3AE79 /* LSM303.h */,
-				ABA594D8B99635EDA1D247DC /* LSM303.cpp */,
-				ABA593F5DAF8D24F83512094 /* keywords.txt */,
-			);
-			path = LSM303;
 			sourceTree = "<group>";
 		};
 		ABA59736D994EEADCD0C736E /* GsmScanNetworks */ = {
@@ -1950,14 +1897,6 @@
 			path = TwoPortReceive;
 			sourceTree = "<group>";
 		};
-		ABA597BE20B083CBC6618463 /* PID_RelayOutput */ = {
-			isa = PBXGroup;
-			children = (
-				ABA59D598099CDEC5B7CCC0F /* PID_RelayOutput.ino */,
-			);
-			path = PID_RelayOutput;
-			sourceTree = "<group>";
-		};
 		ABA597D00FC1E270DB5AFFE0 /* EsploraAccelerometer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1972,16 +1911,6 @@
 				ABA59A5057E37A97BACCD588 /* slave_receiver.ino */,
 			);
 			path = slave_receiver;
-			sourceTree = "<group>";
-		};
-		ABA597E5F3342EDFED43FB08 /* Examples */ = {
-			isa = PBXGroup;
-			children = (
-				ABA598AB3D644D2B0BD85E52 /* PID_Basic */,
-				ABA597BE20B083CBC6618463 /* PID_RelayOutput */,
-				ABA5902D9A34165004F79BB7 /* PID_AdaptiveTunings */,
-			);
-			path = Examples;
 			sourceTree = "<group>";
 		};
 		ABA597FFE01AEEDDB1AE816F /* examples */ = {
@@ -2094,14 +2023,6 @@
 			path = DigitalPotControl;
 			sourceTree = "<group>";
 		};
-		ABA598AB3D644D2B0BD85E52 /* PID_Basic */ = {
-			isa = PBXGroup;
-			children = (
-				ABA5958F1F72CE169A01B216 /* PID_Basic.ino */,
-			);
-			path = PID_Basic;
-			sourceTree = "<group>";
-		};
 		ABA598AFA5511733AD37577B /* examples */ = {
 			isa = PBXGroup;
 			children = (
@@ -2143,14 +2064,6 @@
 			path = WiFiWebServer;
 			sourceTree = "<group>";
 		};
-		ABA598CAE720C460F8600FEE /* Calibrate */ = {
-			isa = PBXGroup;
-			children = (
-				ABA595FEFEF49D0AD453A215 /* Calibrate.ino */,
-			);
-			path = Calibrate;
-			sourceTree = "<group>";
-		};
 		ABA598CEA67152D00091AA0B /* EsploraTFTBitmapLogo */ = {
 			isa = PBXGroup;
 			children = (
@@ -2158,14 +2071,6 @@
 				ABA59D41643BDBDD5470032A /* EsploraTFTBitmapLogo.ino */,
 			);
 			path = EsploraTFTBitmapLogo;
-			sourceTree = "<group>";
-		};
-		ABA598DC0F5E67C73CEDDC60 /* Serial */ = {
-			isa = PBXGroup;
-			children = (
-				ABA59016A3958A19521685B1 /* Serial.ino */,
-			);
-			path = Serial;
 			sourceTree = "<group>";
 		};
 		ABA598E4CF8ECB0CCB9B426D /* mega */ = {
@@ -2370,10 +2275,10 @@
 		ABA59A084B78500F103B1D87 = {
 			isa = PBXGroup;
 			children = (
+				D1024AA71838F0F600744609 /* Libraries */,
 				ABA59533315887865E79A789 /* Products */,
 				ABA5961F62BE81C97775F6ED /* Copter */,
 				ABA5920E8F71C95FDBCBDDB9 /* Framework */,
-				ABA595730DDBFF468CBB7D82 /* Libraries */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2627,17 +2532,6 @@
 				ABA5975230CE5CC0BD7CA9DD /* R03_Disco_Bot.ino */,
 			);
 			path = R03_Disco_Bot;
-			sourceTree = "<group>";
-		};
-		ABA59B7DCF18D19C0A7B983E /* L3G */ = {
-			isa = PBXGroup;
-			children = (
-				ABA5980C551B71D14E974FD4 /* L3G.h */,
-				ABA59110D1BF25C1C315381A /* L3G.cpp */,
-				ABA59044E4A288CEDA2719E7 /* examples */,
-				ABA595EAA5FF17249E2623CD /* keywords.txt */,
-			);
-			path = L3G;
 			sourceTree = "<group>";
 		};
 		ABA59B964E3D138C88299206 /* LiquidCrystal */ = {
@@ -3033,16 +2927,6 @@
 			path = DhcpAddressPrinter;
 			sourceTree = "<group>";
 		};
-		ABA59E015E9853EEE3915A89 /* examples */ = {
-			isa = PBXGroup;
-			children = (
-				ABA598DC0F5E67C73CEDDC60 /* Serial */,
-				ABA5970ECE11550D14A224D5 /* Heading */,
-				ABA598CAE720C460F8600FEE /* Calibrate */,
-			);
-			path = examples;
-			sourceTree = "<group>";
-		};
 		ABA59E09476E7E394A02646E /* WiFiPachubeClientString */ = {
 			isa = PBXGroup;
 			children = (
@@ -3057,17 +2941,6 @@
 				ABA598C2821CA032C040C796 /* Robot_IR_Array_Test.ino */,
 			);
 			path = Robot_IR_Array_Test;
-			sourceTree = "<group>";
-		};
-		ABA59E4D8350916574842E9C /* PID_v1 */ = {
-			isa = PBXGroup;
-			children = (
-				ABA597E5F3342EDFED43FB08 /* Examples */,
-				ABA59303803D1534EA3C26AA /* PID_v1.h */,
-				ABA59C56193D5138185ABEA1 /* PID_v1.cpp */,
-				ABA597E8494D6FC0A498DF25 /* keywords.txt */,
-			);
-			path = PID_v1;
 			sourceTree = "<group>";
 		};
 		ABA59E5FEC99AD4FDD1DAB81 /* R02_Line_Follow */ = {
@@ -3204,14 +3077,6 @@
 			path = learn;
 			sourceTree = "<group>";
 		};
-		ABA59F7DCBDCD1458194D07E /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				ABA59D5AA5861ED4F4F07B92 /* README.md */,
-			);
-			name = Libraries;
-			sourceTree = "<group>";
-		};
 		ABA59F806A71767107269A15 /* CustomCharacter */ = {
 			isa = PBXGroup;
 			children = (
@@ -3252,6 +3117,190 @@
 			path = ConnectNoEncryption;
 			sourceTree = "<group>";
 		};
+		D1024AA71838F0F600744609 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				D1024AA81838F0F600744609 /* bma180 */,
+				D1024AB01838F0F600744609 /* bma180i */,
+				D1024AB31838F0F600744609 /* L3G */,
+				D1024ABA1838F0F600744609 /* LSM303 */,
+				D1024AC81838F0F600744609 /* PID_v1 */,
+			);
+			name = Libraries;
+			path = ../../Libraries;
+			sourceTree = "<group>";
+		};
+		D1024AA81838F0F600744609 /* bma180 */ = {
+			isa = PBXGroup;
+			children = (
+				D1024AA91838F0F600744609 /* bma180.cpp */,
+				D1024AAA1838F0F600744609 /* bma180.h */,
+				D1024AAB1838F0F600744609 /* examples */,
+				D1024AAF1838F0F600744609 /* keywords.txt */,
+			);
+			path = bma180;
+			sourceTree = "<group>";
+		};
+		D1024AAB1838F0F600744609 /* examples */ = {
+			isa = PBXGroup;
+			children = (
+				D1024AAC1838F0F600744609 /* isr_read */,
+				D1024AAE1838F0F600744609 /* pollreadout */,
+			);
+			path = examples;
+			sourceTree = "<group>";
+		};
+		D1024AAC1838F0F600744609 /* isr_read */ = {
+			isa = PBXGroup;
+			children = (
+				D1024AAD1838F0F600744609 /* isr_read.pde */,
+			);
+			path = isr_read;
+			sourceTree = "<group>";
+		};
+		D1024AAE1838F0F600744609 /* pollreadout */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = pollreadout;
+			sourceTree = "<group>";
+		};
+		D1024AB01838F0F600744609 /* bma180i */ = {
+			isa = PBXGroup;
+			children = (
+				D1024AB11838F0F600744609 /* bma180i.cpp */,
+				D1024AB21838F0F600744609 /* bma180i.h */,
+			);
+			path = bma180i;
+			sourceTree = "<group>";
+		};
+		D1024AB31838F0F600744609 /* L3G */ = {
+			isa = PBXGroup;
+			children = (
+				D1024AB41838F0F600744609 /* examples */,
+				D1024AB71838F0F600744609 /* keywords.txt */,
+				D1024AB81838F0F600744609 /* L3G.cpp */,
+				D1024AB91838F0F600744609 /* L3G.h */,
+			);
+			path = L3G;
+			sourceTree = "<group>";
+		};
+		D1024AB41838F0F600744609 /* examples */ = {
+			isa = PBXGroup;
+			children = (
+				D1024AB51838F0F600744609 /* Serial */,
+			);
+			path = examples;
+			sourceTree = "<group>";
+		};
+		D1024AB51838F0F600744609 /* Serial */ = {
+			isa = PBXGroup;
+			children = (
+				D1024AB61838F0F600744609 /* Serial.ino */,
+			);
+			path = Serial;
+			sourceTree = "<group>";
+		};
+		D1024ABA1838F0F600744609 /* LSM303 */ = {
+			isa = PBXGroup;
+			children = (
+				D1024ABB1838F0F600744609 /* LICENSE.txt */,
+				D1024ABC1838F0F600744609 /* LSM303 */,
+				D1024AC71838F0F600744609 /* README.textile */,
+			);
+			path = LSM303;
+			sourceTree = "<group>";
+		};
+		D1024ABC1838F0F600744609 /* LSM303 */ = {
+			isa = PBXGroup;
+			children = (
+				D1024ABD1838F0F600744609 /* examples */,
+				D1024AC41838F0F600744609 /* keywords.txt */,
+				D1024AC51838F0F600744609 /* LSM303.cpp */,
+				D1024AC61838F0F600744609 /* LSM303.h */,
+			);
+			path = LSM303;
+			sourceTree = "<group>";
+		};
+		D1024ABD1838F0F600744609 /* examples */ = {
+			isa = PBXGroup;
+			children = (
+				D1024ABE1838F0F600744609 /* Calibrate */,
+				D1024AC01838F0F600744609 /* Heading */,
+				D1024AC21838F0F600744609 /* Serial */,
+			);
+			path = examples;
+			sourceTree = "<group>";
+		};
+		D1024ABE1838F0F600744609 /* Calibrate */ = {
+			isa = PBXGroup;
+			children = (
+				D1024ABF1838F0F600744609 /* Calibrate.ino */,
+			);
+			path = Calibrate;
+			sourceTree = "<group>";
+		};
+		D1024AC01838F0F600744609 /* Heading */ = {
+			isa = PBXGroup;
+			children = (
+				D1024AC11838F0F600744609 /* Heading.ino */,
+			);
+			path = Heading;
+			sourceTree = "<group>";
+		};
+		D1024AC21838F0F600744609 /* Serial */ = {
+			isa = PBXGroup;
+			children = (
+				D1024AC31838F0F600744609 /* Serial.ino */,
+			);
+			path = Serial;
+			sourceTree = "<group>";
+		};
+		D1024AC81838F0F600744609 /* PID_v1 */ = {
+			isa = PBXGroup;
+			children = (
+				D1024AC91838F0F600744609 /* Examples */,
+				D1024AD01838F0F600744609 /* keywords.txt */,
+				D1024AD11838F0F600744609 /* PID_v1.cpp */,
+				D1024AD21838F0F600744609 /* PID_v1.h */,
+			);
+			path = PID_v1;
+			sourceTree = "<group>";
+		};
+		D1024AC91838F0F600744609 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				D1024ACA1838F0F600744609 /* PID_AdaptiveTunings */,
+				D1024ACC1838F0F600744609 /* PID_Basic */,
+				D1024ACE1838F0F600744609 /* PID_RelayOutput */,
+			);
+			path = Examples;
+			sourceTree = "<group>";
+		};
+		D1024ACA1838F0F600744609 /* PID_AdaptiveTunings */ = {
+			isa = PBXGroup;
+			children = (
+				D1024ACB1838F0F600744609 /* PID_AdaptiveTunings.ino */,
+			);
+			path = PID_AdaptiveTunings;
+			sourceTree = "<group>";
+		};
+		D1024ACC1838F0F600744609 /* PID_Basic */ = {
+			isa = PBXGroup;
+			children = (
+				D1024ACD1838F0F600744609 /* PID_Basic.ino */,
+			);
+			path = PID_Basic;
+			sourceTree = "<group>";
+		};
+		D1024ACE1838F0F600744609 /* PID_RelayOutput */ = {
+			isa = PBXGroup;
+			children = (
+				D1024ACF1838F0F600744609 /* PID_RelayOutput.ino */,
+			);
+			path = PID_RelayOutput;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
@@ -3260,8 +3309,6 @@
 			buildArgumentsString = "all -C \"$(PROJECT)\"";
 			buildConfigurationList = ABA59251EE028E5025C21068 /* Build configuration list for PBXLegacyTarget "FLASH" */;
 			buildPhases = (
-			);
-			buildRules = (
 			);
 			buildToolPath = make;
 			dependencies = (
@@ -3293,6 +3340,9 @@
 /* Begin PBXProject section */
 		ABA59A2634205054AC6FFB1E /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+			};
 			buildConfigurationList = ABA59CA04BC6B6BFD7F8399A /* Build configuration list for PBXProject "Copter" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -3480,9 +3530,6 @@
 				ABA592A35C8D257B8BA9CD1E /* Makefile in Sources */,
 				ABA593CDC34CB8B59A020EED /* Caterina.c in Sources */,
 				ABA5959863CC6375BB072A3C /* Descriptors.c in Sources */,
-				ABA5993CE832928D37E4F4DE /* L3G.cpp in Sources */,
-				ABA591197F180EB7492CB61D /* LSM303.cpp in Sources */,
-				ABA59BB874DF9DE75E149E29 /* PID_v1.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3494,17 +3541,17 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BOARD_TAG = nano328;
-				GCC_PREPROCESSOR_DEFINITIONS = "__AVR_ATmega328P__ ARDUINO=105";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__AVR_ATmega328P__,
+					"ARDUINO=105",
+				);
 				HEADER_SEARCH_PATHS = (
 					"/usr/local/CrossPack-AVR/avr/**",
 					"\"/Users/$(USER)/Dropbox/Arduino\"/**",
 				);
 				PATH = "$(PATH):$(PROJECT_DIR)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = (
-					"/usr/local/CrossPack-AVR/avr/**",
-					"\"/Users/$(USER)/Dropbox/Arduino\"/**",
-				);
+				USER_HEADER_SEARCH_PATHS = "/usr/local/CrossPack-AVR/avr/** \"/Users/$(USER)/Dropbox/Arduino\"/**";
 			};
 			name = Release;
 		};
@@ -3523,16 +3570,16 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "__AVR_ATmega328P__ ARDUINO=105";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__AVR_ATmega328P__,
+					"ARDUINO=105",
+				);
 				HEADER_SEARCH_PATHS = (
 					"/usr/local/CrossPack-AVR/avr/**",
 					"\"/Users/$(USER)/Dropbox/Arduino\"/**",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = (
-					"/usr/local/CrossPack-AVR/avr/**",
-					"\"/Users/$(USER)/Dropbox/Arduino\"/**",
-				);
+				USER_HEADER_SEARCH_PATHS = "/usr/local/CrossPack-AVR/avr/** \"/Users/$(USER)/Dropbox/Arduino\"/**";
 			};
 			name = Release;
 		};
@@ -3545,6 +3592,7 @@
 				ABA59DE10746FA84D5697D8D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ABA59B4C0752CC07F348EC7E /* Build configuration list for PBXNativeTarget "CodeSense" */ = {
 			isa = XCConfigurationList;
@@ -3552,6 +3600,7 @@
 				ABA59E01FBC23F6EFD34259A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ABA59CA04BC6B6BFD7F8399A /* Build configuration list for PBXProject "Copter" */ = {
 			isa = XCConfigurationList;

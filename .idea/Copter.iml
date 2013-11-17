@@ -7,7 +7,9 @@
     <content url="file://$MODULE_DIR$/../../Libraries">
       <sourceFolder url="file://$MODULE_DIR$/../../Libraries" isTestSource="false" />
     </content>
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/build" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
