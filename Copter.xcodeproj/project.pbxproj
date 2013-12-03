@@ -386,6 +386,7 @@
 		ABA595F38EDD63B022927AFD /* STK500V2.pnproj */ = {isa = PBXFileReference; lastKnownFileType = file.pnproj; path = STK500V2.pnproj; sourceTree = "<group>"; };
 		ABA595F499F4661AF0909BA1 /* OldStandardFirmata.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = OldStandardFirmata.ino; sourceTree = "<group>"; };
 		ABA595F68044910D6D8DB40E /* Esplora-prod-firmware-2012-12-10.hex */ = {isa = PBXFileReference; lastKnownFileType = file.hex; path = "Esplora-prod-firmware-2012-12-10.hex"; sourceTree = "<group>"; };
+		ABA595F6A97344232433E8A4 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
 		ABA595FE8D4D49D17EBF73C1 /* EthernetUdp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EthernetUdp.cpp; sourceTree = "<group>"; };
 		ABA5960564BC53C1C62323DD /* HardwareSerial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HardwareSerial.cpp; sourceTree = "<group>"; };
 		ABA596075613D79C38A0E88E /* EsploraTFTColorPicker.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = EsploraTFTColorPicker.ino; sourceTree = "<group>"; };
@@ -2284,6 +2285,7 @@
 				ABA5920E8F71C95FDBCBDDB9 /* Framework */,
 				ABA59128227165986E12474F /* ITG3205.cpp */,
 				ABA59E34B97EF1E66E1072C1 /* ITG3205.h */,
+				ABA595F6A97344232433E8A4 /* .gitignore */,
 			);
 			sourceTree = "<group>";
 		};
