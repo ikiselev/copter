@@ -7,6 +7,12 @@
     <content url="file://$MODULE_DIR$/../../Libraries">
       <sourceFolder url="file://$MODULE_DIR$/../../Libraries" isTestSource="false" />
     </content>
+    <content url="file://$MODULE_DIR$/../../Libraries/ITG3205/ITG3205.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../../Libraries/ITG3205/ITG3205.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../Libraries/ITG3205/ITG3205.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../Libraries/ITG3205/ITG3205.h" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/build" />
     </content>
