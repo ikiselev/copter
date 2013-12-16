@@ -47,7 +47,7 @@ int yOffsetIMU = -1;
 void setup() {
     Serial.begin(115200);
 
-    if (!SDLog.begin(10)) {
+    if (!SDLog.begin(10, 2)) {
         Serial.println("initialization failed!");
         while(1);
     }
@@ -104,7 +104,9 @@ void loop()
     }
 
 
-    SDLog.log("xAngle: ");
+    //acc.x in G{-4;4}
+    SDLog.log("xAngle{100;300}", xAngle);
+    SDLog.log("yAngle{100;300}", yAngle, true);
 
 
     /*xPID.Compute();

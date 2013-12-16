@@ -16,6 +16,7 @@ bool errorCaused = false;
 const int SECTOR_SIZE = 512;
 const char * UNIQUE_DELIMITER = "$$\0";
 const char * END_DELIMITER = "\n\0";
+const char * VALUE_SEPARATOR = ",";
 
 static void spiSend(uint8_t b) {
     SPDR = b;
@@ -348,12 +349,12 @@ void SDLogger::log(String str, bool endOfLine)
         */
         if(SDLog.writeBlock(currentBlock, (unsigned char*)buffer))
         {
-            Serial.print(".");
+            //Serial.print(".");
             currentBlock++;
         }
         else
         {
-            Serial.print(":( ");
+            //Serial.print(":( ");
         }
 
         int offsetLen = buffer_length - SECTOR_SIZE;
@@ -377,4 +378,81 @@ SDLogger SDLog;
 void SDLogger::log(double value, bool endOfLine)
 {
     log(String((long)value), endOfLine);
+}
+
+void SDLogger::log(String columnName, double value, bool endOfLine)
+{
+    String tempValue = String((long)value);
+
+    int millisLen = 0;
+
+    String millisBetweenPack;
+    if(endOfLine)
+    {
+        millisBetweenPack = "|";
+        millisBetweenPack.concat(millis());
+
+        millisLen = millisBetweenPack.length();
+    }
+
+
+    if(!columnNamesInited)
+    {
+        int lastChar = 0;
+        int comaLen = (endOfLine) ? 0 : 1;
+
+
+        if(firstDataLineBuffer == NULL)
+        {
+            firstDataLineBuffer = (char *) malloc(sizeof(char) * tempValue.length() + 1 + comaLen + millisLen); //null-term + ","
+        }
+        else
+        {
+            int len = strlen(firstDataLineBuffer) + tempValue.length() + 1 + comaLen + millisLen;
+            lastChar = len;
+            firstDataLineBuffer = (char *) realloc(firstDataLineBuffer, sizeof(char)*(len));
+        }
+        firstDataLineBuffer[lastChar] = '\0';
+
+        char const * temp = tempValue.c_str();
+        strcat(firstDataLineBuffer, temp);
+
+        if(!endOfLine)
+        {
+            /**
+             * Если строка не последняя, то добавляем запятую
+             */
+            strcat(firstDataLineBuffer, VALUE_SEPARATOR);
+
+
+            columnName.concat(VALUE_SEPARATOR);
+        }
+
+        /**
+         * Накапливаем колонки
+         */
+        log(columnName, endOfLine);
+        if(endOfLine)
+        {
+            columnNamesInited = true;
+
+            char const * millistemp = millisBetweenPack.c_str();
+            strcat(firstDataLineBuffer, millistemp);
+
+            log(firstDataLineBuffer, endOfLine);
+            free(firstDataLineBuffer);
+        }
+    }
+    else
+    {
+        if(!endOfLine)
+        {
+            tempValue.concat(VALUE_SEPARATOR);
+        }
+        else
+        {
+            tempValue.concat(millisBetweenPack);
+        }
+        log(tempValue, endOfLine);
+    }
 }

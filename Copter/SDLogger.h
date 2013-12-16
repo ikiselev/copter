@@ -135,6 +135,7 @@ class SDLogger {
 public:
     boolean begin(uint8_t, uint16_t);
     void log(String str, bool endOfLine = false);
+    void log(String columnName, double value, bool endOfLine = false);
     void log(double value, bool endOfLine = false);
     uint8_t writeBlock(uint32_t blockNumber, uint8_t const *src);
     uint8_t type(void) const {return type_;}
@@ -142,17 +143,25 @@ public:
 
     SDLogger() :
     startWithNumber(true),
+    columnNamesInited(false),
     currentBlock(1),
-    buffer(NULL)
+    buffer(NULL),
+    firstDataLineBuffer(NULL)
     {
 
     }
 
 private:
     char * buffer;
+    /**
+     * Используется для хранения данных из первой колоки
+     * до того как все имена колонок не отправятся
+     */
+    char * firstDataLineBuffer;
     uint16_t logUniqueNumber;
     uint32_t currentBlock;
     boolean startWithNumber;
+    boolean columnNamesInited;
 
 
     uint8_t chipSelectPin_;
