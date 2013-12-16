@@ -133,19 +133,26 @@ uint8_t const SD_CARD_TYPE_SDHC = 3;
 
 class SDLogger {
 public:
-    boolean begin(uint8_t);
+    boolean begin(uint8_t, uint16_t);
     void log(String str, bool endOfLine = false);
+    void log(double value, bool endOfLine = false);
     uint8_t writeBlock(uint32_t blockNumber, uint8_t const *src);
     uint8_t type(void) const {return type_;}
 
 
-    SDLogger(char *buffer = NULL,uint32_t logUniqueNumber = 3, uint32_t currentBlock = 1):buffer(buffer), logUniqueNumber(logUniqueNumber), currentBlock(currentBlock) {
+    SDLogger() :
+    startWithNumber(true),
+    currentBlock(1),
+    buffer(NULL)
+    {
+
     }
 
 private:
     char * buffer;
     uint16_t logUniqueNumber;
     uint32_t currentBlock;
+    boolean startWithNumber;
 
 
     uint8_t chipSelectPin_;

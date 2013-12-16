@@ -28,8 +28,9 @@ static  uint8_t spiRec(void) {
 }
 
 
-boolean SDLogger::begin(uint8_t csPin)
+boolean SDLogger::begin(uint8_t csPin, uint16_t logUniqueNumber)
 {
+    this->logUniqueNumber = logUniqueNumber;
     return initCard(csPin);
 }
 
@@ -258,23 +259,37 @@ void SDLogger::log(String str, bool endOfLine)
         Serial.print("MAEC"); //Memory allocation error caused
         return;
     }
-    /**
-    * Уникальный номер записи, по которому можно определить конец данных
-    */
-    logUniqueNumber++;
 
     /**
-    * Перевод числа в строку
-    */
-    int numberLen = 5 + 1; //65535 has 5 chars + 1 null-terminated
-    char * number = (char *) malloc(sizeof(char) * numberLen);
-    sprintf(number,"%d",logUniqueNumber);
-
-    /**
-    * Подсчет кол-ва места необходимого для выделения лог-строки
-    */
+     * Подсчет кол-ва места необходимого для выделения лог-строки
+     */
     char const * temp = str.c_str();
-    int buffer_length = strlen(number) + strlen(UNIQUE_DELIMITER) + strlen(temp) + strlen(END_DELIMITER) + 1; //null termination
+    int buffer_length = strlen(temp);
+
+    char * number = NULL;
+    if(startWithNumber)
+    {
+        /**
+         * Уникальный номер записи, по которому можно определить конец данных
+         */
+        logUniqueNumber++;
+
+        /**
+         * Перевод числа в строку
+         */
+        int numberLen = 5 + 1; //65535 has 5 chars + 1 null-terminated
+        number = (char *) malloc(sizeof(char) * numberLen);
+        sprintf(number,"%d",logUniqueNumber);
+
+        buffer_length += strlen(number) + strlen(UNIQUE_DELIMITER);
+    }
+
+
+    buffer_length += 1; //null termination
+    if(endOfLine)
+    {
+        buffer_length += strlen(END_DELIMITER);
+    }
     int lastChar = 0;
 
     if(buffer == NULL)
@@ -310,12 +325,20 @@ void SDLogger::log(String str, bool endOfLine)
     /**
     * Объединение строк в одну
     */
-    strcat(buffer, number);
-    strcat(buffer, UNIQUE_DELIMITER);
+    if(startWithNumber)
+    {
+        strcat(buffer, number);
+        free( number );
+        strcat(buffer, UNIQUE_DELIMITER);
+        startWithNumber = false;
+    }
     strcat(buffer, temp);
-    strcat(buffer, END_DELIMITER);
 
-    free( number );
+    if(endOfLine)
+    {
+        strcat(buffer, END_DELIMITER);
+        startWithNumber = true;
+    }
 
     //TODO: maybe buffer_length instead of strlen?
     while(strlen(buffer) >= SECTOR_SIZE)
@@ -347,8 +370,11 @@ void SDLogger::log(String str, bool endOfLine)
         buffer[offsetLen] = '\0';
 
     }
-
-    delay(200);
 }
 
 SDLogger SDLog;
+
+void SDLogger::log(double value, bool endOfLine)
+{
+    log(String((long)value), endOfLine);
+}
