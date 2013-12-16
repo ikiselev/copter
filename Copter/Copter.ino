@@ -2,13 +2,8 @@
 #include "Arduino.h"
 #include "ITG3205.h"
 #include "bma180i.h"
+#include "SDLogger.h"
 #include "IMUFilter.h"
-//#include <PID_v1.h>
-
-
-#include <SD.h>
-
-File myFile;
 
 
 double targetAngleX = 180.0;
@@ -49,17 +44,12 @@ int yOffsetIMU = -1;
 
 
 
-
-void setup()
-{
+void setup() {
     Serial.begin(115200);
 
-    pinMode(10, OUTPUT);
-
-    if (!SD.begin(10)) {
+    if (!SDLog.begin(10)) {
         Serial.println("initialization failed!");
         while(1);
-        return;
     }
 
 
@@ -114,15 +104,7 @@ void loop()
     }
 
 
-    myFile = SD.open("test.txt", FILE_WRITE);
-
-
-    myFile.print("xAngle: ");
-    myFile.print(xAngle);
-    myFile.print(" yAngle: ");
-    myFile.println(yAngle);
-
-    myFile.close();
+    SDLog.log("xAngle: ");
 
 
     /*xPID.Compute();
