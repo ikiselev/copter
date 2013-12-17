@@ -1,6 +1,8 @@
 #ifndef __CONFIG_H_
 #define __CONFIG_H_
 
+uint8_t loggerType = LOGGER_SERIAL;
+
 /**
  * Возможность задать время полета
  */

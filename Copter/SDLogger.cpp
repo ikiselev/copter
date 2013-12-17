@@ -18,6 +18,11 @@ const char * UNIQUE_DELIMITER = "$$\0";
 const char * END_DELIMITER = "\n\0";
 const char * VALUE_SEPARATOR = ",";
 
+
+SDLogger Logger;
+
+
+
 static void spiSend(uint8_t b) {
     SPDR = b;
     while (!(SPSR & (1 << SPIF)));
@@ -29,17 +34,26 @@ static  uint8_t spiRec(void) {
 }
 
 
-boolean SDLogger::begin(uint8_t csPin, uint16_t logUniqueNumber)
+boolean SDLogger::begin(uint8_t loggerType, uint16_t logUniqueNumber)
 {
+    this->loggerType = loggerType;
     this->logUniqueNumber = logUniqueNumber;
-    sdCardInited = initCard(csPin);
+    if(loggerType == LOGGER_SD_CARD)
+    {
+        sdCardInited = initCard();
+    }
+    else if(loggerType == LOGGER_SERIAL)
+    {
+        Serial.begin(115200);
+        sdCardInited = true;
+    }
     return sdCardInited;
 }
 
-boolean SDLogger::initCard(uint8_t csPin)
+boolean SDLogger::initCard()
 {
     errorCode_ = type_ = 0;
-    chipSelectPin_ = csPin;
+    chipSelectPin_ = SS_PIN;
 
 
     uint16_t t0 = (uint16_t)millis();
@@ -345,16 +359,36 @@ void SDLogger::log(String str, bool endOfLine)
     if(endOfLine)
     {
         strcat(buffer, END_DELIMITER);
-        startWithNumber = true;
+
+        //TODO: need refactoring
+        startWithNumber = (loggerType == LOGGER_SD_CARD);
     }
 
+    if(loggerType == LOGGER_SD_CARD)
+    {
+        flushSdCard(buffer_length);
+    }
+    else if(loggerType == LOGGER_SERIAL)
+    {
+        if(endOfLine)
+        {
+            /**
+             * Flush only if string is ready
+             */
+            flushSerial();
+        }
+    }
+}
+
+void SDLogger::flushSdCard(int buffer_length)
+{
     //TODO: maybe buffer_length instead of strlen?
     while(strlen(buffer) >= SECTOR_SIZE)
     {
         /**
         * writeBlock не запишет больше 512 байт (блок) из buffer. Это нам и нужно
         */
-        if(SDLog.writeBlock(currentBlock, (unsigned char*)buffer))
+        if(writeBlock(currentBlock, (unsigned char*)buffer))
         {
             //Serial.print(".");
             currentBlock++;
@@ -376,21 +410,20 @@ void SDLogger::log(String str, bool endOfLine)
         }
 
         buffer[offsetLen] = '\0';
-
     }
 }
 
-SDLogger SDLog;
-
-void SDLogger::log(double value, bool endOfLine)
+void SDLogger::flushSerial()
 {
-    if(!sdCardInited)
-    {
+    Serial.print(buffer);
 
-        return ;
-    }
-    log(String((long)value), endOfLine);
+    /**
+     * Очищаем буфер для следующих строк
+     */
+    free(buffer);
+    buffer = NULL;
 }
+
 
 void SDLogger::log(String columnName, double value, bool endOfLine)
 {
@@ -471,6 +504,7 @@ void SDLogger::log(String columnName, double value, bool endOfLine)
         {
             tempValue.concat(millisBetweenPack);
         }
+
         log(tempValue, endOfLine);
     }
 }

@@ -25,12 +25,11 @@ void motorsOff();
 
 
 void setup() {
-    Serial.begin(115200);
     Wire.begin();
 
 
-    if (!SDLog.begin(10, 4)) {
-        Serial.println("SD card initialization failed! Working without logging");
+    if (!Logger.begin(loggerType, 4)) {
+        Serial.println("Logger initialization failed! Working without logging");
     }
 
 
@@ -94,10 +93,10 @@ void loop()
 
 
     //Logging
-    SDLog.log("xAngle{100;260}", xAngle);
-    SDLog.log("yAngle{100;260}", yAngle);
-    SDLog.log("xPIDSpeed{-200;200}", xPIDSpeed);
-    SDLog.log("yPIDSpeed{-200;200}", yPIDSpeed, true);
+    Logger.log("xAngle{100;260}", xAngle);
+    Logger.log("yAngle{100;260}", yAngle);
+    Logger.log("xPIDSpeed{-200;200}", xPIDSpeed);
+    Logger.log("yPIDSpeed{-200;200}", yPIDSpeed, true);
 }
 
 

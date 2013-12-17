@@ -7,6 +7,10 @@
 #include "Arduino.h"
 
 
+#define LOGGER_NONE 0
+#define LOGGER_SD_CARD 1
+#define LOGGER_SERIAL 2
+
 // SPI port
 uint8_t const SS_PIN = 10;
 uint8_t const MOSI_PIN = 11;
@@ -134,14 +138,14 @@ public:
     boolean begin(uint8_t, uint16_t);
     void log(String str, bool endOfLine = false);
     void log(String columnName, double value, bool endOfLine = false);
-    void log(double value, bool endOfLine = false);
 
 
     SDLogger() :
-    startWithNumber(true),
+    startWithNumber((loggerType == LOGGER_SD_CARD)), //TODO: refactor?
     columnNamesInited(false),
     sdCardInited(false),
     currentBlock(1),
+    loggerType(LOGGER_NONE),
     buffer(NULL),
     firstDataLineBuffer(NULL)
     {
@@ -150,6 +154,7 @@ public:
 
 private:
     boolean sdCardInited;
+    uint8_t loggerType;
     /**
      * Буфер для отправки на карту.
      * Данные записываются как только накопится SECTOR_SIZE байт
@@ -162,7 +167,7 @@ private:
     char * firstDataLineBuffer;
     uint16_t logUniqueNumber;
     uint32_t currentBlock;
-    boolean startWithNumber;
+    bool startWithNumber;
     boolean columnNamesInited;
 
 
@@ -193,7 +198,7 @@ private:
 
     uint8_t waitNotBusy(uint16_t timeoutMillis);
 
-    boolean initCard(uint8_t csPin);
+    boolean initCard();
 
     uint8_t writeData(uint8_t token, uint8_t const *src);
 
@@ -201,8 +206,11 @@ private:
 
     uint8_t type(void) const {return type_;}
 
+    void flushSdCard(int);
+
+    void flushSerial();
 };
 
-extern SDLogger SDLog;
+extern SDLogger Logger;
 
 #endif //__SDLogger_H_
