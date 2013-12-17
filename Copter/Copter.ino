@@ -68,6 +68,8 @@ void loop()
         return;
     }
 
+    xPID.Compute();
+    yPID.Compute();
 
     if(millis() < heatUpTime)
     {
@@ -81,8 +83,7 @@ void loop()
     }
 
 
-    xPID.Compute();
-    yPID.Compute();
+
 
 
     analogWrite(esc_x1_pin, constrain(xSpeed - xPIDSpeed / 2, 0, 255));

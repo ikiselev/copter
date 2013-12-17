@@ -468,6 +468,15 @@ void SDLogger::log(String columnName, double value, bool endOfLine)
         char const * temp = tempValue.c_str();
         strcat(firstDataLineBuffer, temp);
 
+
+        if(isFirstColumn)
+        {
+            isFirstColumn = false;
+            String header = String("Columns:");
+            header += columnName;
+            columnName = header;
+        }
+
         if(!endOfLine)
         {
             /**

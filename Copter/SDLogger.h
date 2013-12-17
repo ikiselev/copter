@@ -144,6 +144,7 @@ public:
     startWithNumber((loggerType == LOGGER_SD_CARD)), //TODO: refactor?
     columnNamesInited(false),
     sdCardInited(false),
+    isFirstColumn(true),
     currentBlock(1),
     loggerType(LOGGER_NONE),
     buffer(NULL),
@@ -169,6 +170,7 @@ private:
     uint32_t currentBlock;
     bool startWithNumber;
     boolean columnNamesInited;
+    bool isFirstColumn;
 
 
     uint8_t chipSelectPin_;
