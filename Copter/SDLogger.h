@@ -13,8 +13,6 @@ uint8_t const MOSI_PIN = 11;
 uint8_t const MISO_PIN = 12;
 uint8_t const SCK_PIN = 13;
 
-int const BYTES_PER_BLOCK = 512;
-
 
 /** GO_IDLE_STATE - init card in spi mode if CS low */
 uint8_t const CMD0 = 0X00;
@@ -137,13 +135,12 @@ public:
     void log(String str, bool endOfLine = false);
     void log(String columnName, double value, bool endOfLine = false);
     void log(double value, bool endOfLine = false);
-    uint8_t writeBlock(uint32_t blockNumber, uint8_t const *src);
-    uint8_t type(void) const {return type_;}
 
 
     SDLogger() :
     startWithNumber(true),
     columnNamesInited(false),
+    sdCardInited(false),
     currentBlock(1),
     buffer(NULL),
     firstDataLineBuffer(NULL)
@@ -152,6 +149,11 @@ public:
     }
 
 private:
+    boolean sdCardInited;
+    /**
+     * Буфер для отправки на карту.
+     * Данные записываются как только накопится SECTOR_SIZE байт
+     */
     char * buffer;
     /**
      * Используется для хранения данных из первой колоки
@@ -194,6 +196,11 @@ private:
     boolean initCard(uint8_t csPin);
 
     uint8_t writeData(uint8_t token, uint8_t const *src);
+
+    uint8_t writeBlock(uint32_t blockNumber, uint8_t const *src);
+
+    uint8_t type(void) const {return type_;}
+
 };
 
 extern SDLogger SDLog;

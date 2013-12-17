@@ -606,6 +606,7 @@
 		ABA59A15FC22C7BFE3F12223 /* EsploraTFTGraph.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = EsploraTFTGraph.ino; sourceTree = "<group>"; };
 		ABA59A180571F7239EC27CCB /* MakeVoiceCall.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = MakeVoiceCall.ino; sourceTree = "<group>"; };
 		ABA59A196542E56771B907D3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = file.md; path = README.md; sourceTree = "<group>"; };
+		ABA59A1CD59F7D0EAD48F578 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		ABA59A325275A5F89EFE2246 /* StandardFirmata.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = StandardFirmata.ino; sourceTree = "<group>"; };
 		ABA59A41A1525C9671B1E792 /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		ABA59A441955638116A63EAB /* SimpleDigitalFirmata.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = SimpleDigitalFirmata.ino; sourceTree = "<group>"; };
@@ -1917,6 +1918,7 @@
 				ABA59D8ABDFE8DD8522F97B6 /* IMUFilter.h */,
 				ABA59B4F134B86D056509BDB /* SDLogger.cpp */,
 				ABA59EB8445893CF50B995F5 /* SDLogger.h */,
+				ABA59A1CD59F7D0EAD48F578 /* config.h */,
 			);
 			path = Copter;
 			sourceTree = "<group>";

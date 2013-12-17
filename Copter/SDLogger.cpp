@@ -32,7 +32,8 @@ static  uint8_t spiRec(void) {
 boolean SDLogger::begin(uint8_t csPin, uint16_t logUniqueNumber)
 {
     this->logUniqueNumber = logUniqueNumber;
-    return initCard(csPin);
+    sdCardInited = initCard(csPin);
+    return sdCardInited;
 }
 
 boolean SDLogger::initCard(uint8_t csPin)
@@ -255,6 +256,12 @@ void SDLogger::chipSelectLow(void) {
 
 void SDLogger::log(String str, bool endOfLine)
 {
+    if(!sdCardInited)
+    {
+
+        return ;
+    }
+
     if(errorCaused)
     {
         Serial.print("MAEC"); //Memory allocation error caused
@@ -377,11 +384,22 @@ SDLogger SDLog;
 
 void SDLogger::log(double value, bool endOfLine)
 {
+    if(!sdCardInited)
+    {
+
+        return ;
+    }
     log(String((long)value), endOfLine);
 }
 
 void SDLogger::log(String columnName, double value, bool endOfLine)
 {
+    if(!sdCardInited)
+    {
+
+        return ;
+    }
+
     String tempValue = String((long)value);
 
     int millisLen = 0;

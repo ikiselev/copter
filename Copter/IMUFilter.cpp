@@ -10,8 +10,9 @@
   * Initializes the quaternion
   */
 IMUFilter::IMUFilter() {
-    q0 = 1.0f;
-    q1 = 0.0f;
+    //TODO: make params for initialization, or predict by accel
+    q0 = 0.0f;
+    q1 = 1.0f; //Upside down
     q2 = 0.0f;
     q3 = 0.0f;
 
