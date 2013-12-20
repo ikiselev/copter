@@ -6,7 +6,7 @@
 #define LOGGER_SERIAL 2
 
 
-#define DEBUG_ENABLE 1
+#define DEBUG_ENABLE 0
 
 
 

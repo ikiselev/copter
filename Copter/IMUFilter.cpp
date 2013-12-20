@@ -62,15 +62,7 @@ void IMUFilter::init() {
   */
 void IMUFilter::getReadings() {
     gyro.GyroRead();
-    gyroX = gyro.g.x;
-    gyroY = gyro.g.y;
-    gyroZ = gyro.g.z;
-
-
     accel.readAcc();
-    accelX = accel.a.x;
-    accelY = accel.a.y;
-    accelZ = accel.a.z;
 }
 
 
@@ -95,7 +87,7 @@ void IMUFilter::getQuaternion(float* q) {
     now = micros();
     sampleFreq = 1.0 / ((now - lastUpdate) / 1000000.0);
     lastUpdate = now;
-    updateAHRS(gyroX * M_PI / 180, gyroY * M_PI/180, gyroZ * M_PI/180, accelX, accelY, accelZ);
+    updateAHRS(gyro.g.x * M_PI / 180, gyro.g.y * M_PI/180, gyro.g.z * M_PI/180, accel.a.x, accel.a.y, accel.a.z);
 
     q[0] = q0;
     q[1] = q1;
@@ -207,31 +199,6 @@ void IMUFilter::updateAHRS(float gx, float gy, float gz, float ax, float ay, flo
     q1 *= recipNorm;
     q2 *= recipNorm;
     q3 *= recipNorm;
-}
-
-/**
-  * Debugging for accel and gyro
-  */
-void IMUFilter::print(boolean accel_debug, boolean gyro_debug) {
-    getReadings();
-    if(gyro_debug) {
-        Serial.print("Gyro: ");
-        Serial.print(gyroX);
-        Serial.print('\t');
-        Serial.print(gyroY);
-        Serial.print('\t');
-        Serial.print(gyroZ);
-        Serial.print('\n');
-    }
-    if(accel_debug) {
-        Serial.print("Accel: ");
-        Serial.print(accelX);
-        Serial.print('\t');
-        Serial.print(accelY);
-        Serial.print('\t');
-        Serial.print(accelZ);
-        Serial.print('\n');
-    }
 }
 
 

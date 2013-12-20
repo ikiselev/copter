@@ -15,9 +15,6 @@ class IMUFilter {
     bma180i accel;
     ITG3205 gyro;
 
-    int gyroX, gyroY, gyroZ;
-    int accelX, accelY, accelZ;
-
     // Stuff from FreeIMU DCM
     float iq0, iq1, iq2, iq3;
     float exInt, eyInt, ezInt;                // scaled integral error
@@ -34,7 +31,6 @@ public:
 
     void init();
     void getReadings();
-    void print(boolean accel_debug, boolean gyro_debug);
     void getQuaternion(float* q);
     void updateAHRS(float gx, float gy, float gz, float ax, float ay, float az);
     void getEuler(float* angles);
