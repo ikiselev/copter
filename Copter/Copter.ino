@@ -31,7 +31,7 @@ void setup() {
     Serial.begin(115200);
 
     if (!Logger.begin(config.loggerType)) {
-        //Serial.println("Logger initialization failed! Working without logging");
+        debug("Logger initialization failed! Working without logging");
     }
     Logger.setCurrentBlock(config.sdCardStartBlock_config);
 
