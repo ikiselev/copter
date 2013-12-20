@@ -146,7 +146,7 @@ public:
 
 
     SDLogger() :
-    startWithNumber(true),
+    startWithNumber((loggerType == LOGGER_SD_CARD)),
     columnNamesInited(false),
     sdCardInited(false),
     isFirstColumn(true),

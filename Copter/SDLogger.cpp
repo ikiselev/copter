@@ -327,11 +327,18 @@ void SDLogger::log(String str, bool endOfLine)
         /**
          * Flush only if end of line
          */
-        messagesCounter++;
-        if(messagesCounter >= MESSAGES_COUNT_FLUSH)
+        if(loggerType == LOGGER_SD_CARD)
+        {
+            messagesCounter++;
+            if(messagesCounter >= MESSAGES_COUNT_FLUSH)
+            {
+                flush(buffer);
+                messagesCounter = 0;
+            }
+        }
+        else
         {
             flush(buffer);
-            messagesCounter = 0;
         }
     }
 
@@ -391,16 +398,7 @@ void SDLogger::log(String columnName, double value, bool endOfLine)
             /**
              * Flush headers manually
              */
-            if(loggerType == LOGGER_SD_CARD)
-            {
-                Serial.print("Header columns: ");
-                Serial.println(headerColumns);
-                flush((char *)headerColumns.c_str());
-            }
-            else if(loggerType == LOGGER_SERIAL)
-            {
-                //TODO:
-            }
+            flush((char *)headerColumns.c_str());
 
             headerColumns = NULL;
         }
