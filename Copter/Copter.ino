@@ -1,9 +1,11 @@
 #include "Arduino.h"
+
+#include "config.h"
+
 #include <Wire.h>
 #include "SDLogger.h"
 #include "IMUFilter.h"
 #include "PID_v1.h"
-#include "config.h"
 
 
 IMUFilter imu;
@@ -17,8 +19,8 @@ double xPIDSpeed;
 double yPIDSpeed;
 
 
-PID xPID(&xAngle, &xPIDSpeed, &targetAngleX, 0.7, 0, 0, DIRECT);
-PID yPID(&yAngle, &yPIDSpeed, &targetAngleY, 0.7, 0, 0, DIRECT);
+PID xPID(&xAngle, &xPIDSpeed, &config.targetAngleX, 0.7, 0, 0, DIRECT);
+PID yPID(&yAngle, &yPIDSpeed, &config.targetAngleY, 0.7, 0, 0, DIRECT);
 
 
 void motorsOff();
@@ -28,26 +30,26 @@ void setup() {
     Wire.begin();
     Serial.begin(115200);
 
-    if (!Logger.begin(loggerType)) {
+    if (!Logger.begin(config.loggerType)) {
         //Serial.println("Logger initialization failed! Working without logging");
     }
-    Logger.setCurrentBlock(sdCardStartBlock_config);
+    Logger.setCurrentBlock(config.sdCardStartBlock_config);
 
 
     imu.init();
 
-    pinMode(esc_x1_pin, OUTPUT);
-    pinMode(esc_x2_pin, OUTPUT);
+    pinMode(config.esc_x1_pin, OUTPUT);
+    pinMode(config.esc_x2_pin, OUTPUT);
 
-    pinMode(esc_y1_pin, OUTPUT);
-    pinMode(esc_y2_pin, OUTPUT);
+    pinMode(config.esc_y1_pin, OUTPUT);
+    pinMode(config.esc_y2_pin, OUTPUT);
 
 
-    xPID.SetOutputLimits(-pidOutputLimits, pidOutputLimits);
+    xPID.SetOutputLimits(-config.pidOutputLimits, config.pidOutputLimits);
     xPID.SetMode(AUTOMATIC);
     xPID.SetSampleTime(5);
 
-    yPID.SetOutputLimits(-pidOutputLimits, pidOutputLimits);
+    yPID.SetOutputLimits(-config.pidOutputLimits, config.pidOutputLimits);
     yPID.SetMode(AUTOMATIC);
     yPID.SetSampleTime(5);
 }
@@ -56,25 +58,25 @@ void setup() {
 
 void loop()
 {
-    if(millis() > flightTime + heatUpTime)
+    if(millis() > config.flightTime + config.heatUpTime)
     {
         motorsOff();
         return;
     }
 
     imu.getRPY(angles);
-    xAngle = angles[1] + 180 + xOffsetIMU;
-    yAngle = angles[0] + 180 + yOffsetIMU;
+    xAngle = angles[1] + 180 + config.xOffsetIMU;
+    yAngle = angles[0] + 180 + config.yOffsetIMU;
 
-    if((abs(xAngle - targetAngleX) > failsafeAngle)
-        || (abs(yAngle - targetAngleY) > failsafeAngle))
+    if((abs(xAngle - config.targetAngleX) > config.failsafeAngle)
+        || (abs(yAngle - config.targetAngleY) > config.failsafeAngle))
     {
 
         motorsOff();
         return;
     }
 
-    if(millis() < heatUpTime)
+    if(millis() < config.heatUpTime)
     {
         return;
     }
@@ -87,11 +89,11 @@ void loop()
     yPID.Compute();
 
 
-    analogWrite(esc_x1_pin, constrain(xSpeed - xPIDSpeed / 2, 0, 255));
-    analogWrite(esc_x2_pin, constrain(xSpeed + xPIDSpeed / 2, 0, 255));
+    analogWrite(config.esc_x1_pin, constrain(config.xSpeed - xPIDSpeed / 2, 0, 255));
+    analogWrite(config.esc_x2_pin, constrain(config.xSpeed + xPIDSpeed / 2, 0, 255));
 
-    analogWrite(esc_y1_pin, constrain(ySpeed - yPIDSpeed / 2, 0, 255));
-    analogWrite(esc_y2_pin, constrain(ySpeed + yPIDSpeed / 2, 0, 255));
+    analogWrite(config.esc_y1_pin, constrain(config.ySpeed - yPIDSpeed / 2, 0, 255));
+    analogWrite(config.esc_y2_pin, constrain(config.ySpeed + yPIDSpeed / 2, 0, 255));
 
     //Logging
     Logger.log("xAngle{90;270}", xAngle, false);
@@ -103,10 +105,10 @@ void loop()
 
 
 void motorsOff() {
-    analogWrite(esc_x1_pin, 0);
-    analogWrite(esc_x2_pin, 0);
+    analogWrite(config.esc_x1_pin, 0);
+    analogWrite(config.esc_x2_pin, 0);
 
-    analogWrite(esc_y1_pin, 0);
-    analogWrite(esc_y2_pin, 0);
+    analogWrite(config.esc_y1_pin, 0);
+    analogWrite(config.esc_y2_pin, 0);
 }
 

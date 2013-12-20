@@ -5,11 +5,8 @@
 #define __SDLogger_H_
 
 #include "Arduino.h"
+#include "config.h"
 
-
-#define LOGGER_NONE 0
-#define LOGGER_SD_CARD 1
-#define LOGGER_SERIAL 2
 
 // SPI port
 uint8_t const SS_PIN = 10;

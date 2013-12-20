@@ -100,6 +100,7 @@
 		ABA59823D209D15F791BD0B4 /* EEPROM_I2C.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA591C5C03E016B44664E9E /* EEPROM_I2C.cpp */; };
 		ABA598687C7E0D27D332303E /* GSM3MobileClientProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA5975DD45E1DC95CEAF7C2 /* GSM3MobileClientProvider.cpp */; };
 		ABA59890CC852DD736CD8958 /* RobotTextManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA591F6DE978350A8F5E812 /* RobotTextManager.cpp */; };
+		ABA598C15ED03B0BA09259EB /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA595AF83A07216743ACD24 /* config.cpp */; };
 		ABA598C9C625CE8F6EDD56C2 /* PID_v1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA599FD27F8755F157F0DEF /* PID_v1.cpp */; };
 		ABA598E7A42591D51C2EB7FB /* mmc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA5992F5A4CAC031CDCC55F /* mmc.cpp */; };
 		ABA598F350F29B1616E88FE1 /* lineFollow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA5995AFD2C9E2A1A19D993 /* lineFollow.cpp */; };
@@ -221,6 +222,7 @@
 		ABA5913FBFF537CC4A28956D /* Motors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Motors.cpp; sourceTree = "<group>"; };
 		ABA591472B887A4C594D1974 /* EEPROM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEPROM.h; sourceTree = "<group>"; };
 		ABA5914B7041BF4D2934F65B /* EsploraAccelerometer.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = EsploraAccelerometer.ino; sourceTree = "<group>"; };
+		ABA5914BCC27622E27A37AF5 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		ABA59157590350AF378A58D4 /* WiFi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFi.h; sourceTree = "<group>"; };
 		ABA591646C6476B66233C1C7 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
 		ABA591664F4D39A2968DE320 /* PachubeClient.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = PachubeClient.ino; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 		ABA5959D5C71B411611BEB48 /* USBDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USBDesc.h; sourceTree = "<group>"; };
 		ABA595A0211E1EEB4D73DDEB /* Descriptors.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Descriptors.c; sourceTree = "<group>"; };
 		ABA595A3F1A894D36FA817D6 /* GsmTwitterClient.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = GsmTwitterClient.ino; sourceTree = "<group>"; };
+		ABA595AF83A07216743ACD24 /* config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = config.cpp; sourceTree = "<group>"; };
 		ABA595B529B658C251DA22B6 /* GsmScanNetworks.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = GsmScanNetworks.ino; sourceTree = "<group>"; };
 		ABA595B74CDB1BC02AE7BE35 /* Squawk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Squawk.h; sourceTree = "<group>"; };
 		ABA595B7E1EDE204D67A2947 /* CustomCharacter.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = CustomCharacter.ino; sourceTree = "<group>"; };
@@ -1864,6 +1867,8 @@
 				ABA59B4F134B86D056509BDB /* SDLogger.cpp */,
 				ABA59EB8445893CF50B995F5 /* SDLogger.h */,
 				ABA59A1CD59F7D0EAD48F578 /* config.h */,
+				ABA5914BCC27622E27A37AF5 /* constants.h */,
+				ABA595AF83A07216743ACD24 /* config.cpp */,
 			);
 			path = Copter;
 			sourceTree = "<group>";
@@ -3826,6 +3831,7 @@
 				ABA59E042E6066F69D8E419A /* MemoryFree.cpp in Sources */,
 				ABA59021DAD7EBC78ECBABD1 /* petit_fatfs.cpp in Sources */,
 				ABA59CC41CC017A4D7B035A8 /* PID_AutoTune_v0.cpp in Sources */,
+				ABA598C15ED03B0BA09259EB /* config.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
