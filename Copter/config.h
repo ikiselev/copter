@@ -1,12 +1,21 @@
 #ifndef __CONFIG_H_
 #define __CONFIG_H_
 
-uint8_t loggerType = LOGGER_SERIAL;
+/**
+ * Тип логгера
+ */
+uint8_t loggerType = LOGGER_SD_CARD;
+/**
+ * SD Card Start block
+ */
+uint32_t sdCardStartBlock_config = 1025;
 
 /**
  * Возможность задать время полета
+ * В миллисекундах
+ * 0 - не выключаться
  */
-int flightTime = 4000;
+int flightTime = 8000;
 
 
 /**
@@ -24,6 +33,11 @@ int heatUpTime = 3000;
 double xSpeed = 40;
 double ySpeed = 40;
 
+/**
+ * ПИД максимальные значения (+-)
+ */
+double pidOutputLimits = 90;
+
 
 /**
  * Fail-safe
@@ -35,9 +49,12 @@ int failsafeAngle = 90;
 /**
  * Калибровка угла плоскости припаянной инерциальной сборки на коптере
  * по отношению к плоскости коптера.
+ * На ровной поверхности
+ * X: 181
+ * Y:177
  */
-int xOffsetIMU = 6;
-int yOffsetIMU = -1;
+int xOffsetIMU = -1;
+int yOffsetIMU = +3;
 
 
 /**

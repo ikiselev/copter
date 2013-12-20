@@ -252,7 +252,7 @@ endif
 
 
 ifndef CFLAGS_STD
-    CFLAGS_STD        = -std=gnu99
+    CFLAGS_STD        = -std=gnu++11
 endif
 
 CFLAGS        += $(EXTRA_FLAGS) $(EXTRA_CFLAGS)

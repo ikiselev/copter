@@ -17,8 +17,8 @@ double xPIDSpeed;
 double yPIDSpeed;
 
 
-PID xPID(&xAngle, &xPIDSpeed, &targetAngleX, 0.148, 0.08, 0.004, DIRECT);
-PID yPID(&yAngle, &yPIDSpeed, &targetAngleY, 0.148, 0.08, 0.004, DIRECT);
+PID xPID(&xAngle, &xPIDSpeed, &targetAngleX, 0.7, 0, 0, DIRECT);
+PID yPID(&yAngle, &yPIDSpeed, &targetAngleY, 0.7, 0, 0, DIRECT);
 
 
 void motorsOff();
@@ -26,11 +26,12 @@ void motorsOff();
 
 void setup() {
     Wire.begin();
+    Serial.begin(115200);
 
-
-    if (!Logger.begin(loggerType, 4)) {
-        Serial.println("Logger initialization failed! Working without logging");
+    if (!Logger.begin(loggerType)) {
+        //Serial.println("Logger initialization failed! Working without logging");
     }
+    Logger.setCurrentBlock(sdCardStartBlock_config);
 
 
     imu.init();
@@ -42,11 +43,11 @@ void setup() {
     pinMode(esc_y2_pin, OUTPUT);
 
 
-    xPID.SetOutputLimits(-200, 200);
+    xPID.SetOutputLimits(-pidOutputLimits, pidOutputLimits);
     xPID.SetMode(AUTOMATIC);
     xPID.SetSampleTime(5);
 
-    yPID.SetOutputLimits(-200, 200);
+    yPID.SetOutputLimits(-pidOutputLimits, pidOutputLimits);
     yPID.SetMode(AUTOMATIC);
     yPID.SetSampleTime(5);
 }
@@ -55,8 +56,13 @@ void setup() {
 
 void loop()
 {
-    imu.getRPY(angles);
+    if(millis() > flightTime + heatUpTime)
+    {
+        motorsOff();
+        return;
+    }
 
+    imu.getRPY(angles);
     xAngle = angles[1] + 180 + xOffsetIMU;
     yAngle = angles[0] + 180 + yOffsetIMU;
 
@@ -68,22 +74,17 @@ void loop()
         return;
     }
 
-    xPID.Compute();
-    yPID.Compute();
-
     if(millis() < heatUpTime)
     {
         return;
     }
 
-    if(millis() > flightTime + heatUpTime)
-    {
-        motorsOff();
-        return;
-    }
 
 
 
+
+    xPID.Compute();
+    yPID.Compute();
 
 
     analogWrite(esc_x1_pin, constrain(xSpeed - xPIDSpeed / 2, 0, 255));
@@ -92,12 +93,11 @@ void loop()
     analogWrite(esc_y1_pin, constrain(ySpeed - yPIDSpeed / 2, 0, 255));
     analogWrite(esc_y2_pin, constrain(ySpeed + yPIDSpeed / 2, 0, 255));
 
-
     //Logging
-    Logger.log("xAngle{100;260}", xAngle);
-    Logger.log("yAngle{100;260}", yAngle);
-    Logger.log("xPIDSpeed{-200;200}", xPIDSpeed);
-    Logger.log("yPIDSpeed{-200;200}", yPIDSpeed, true);
+    Logger.log("xAngle{90;270}", xAngle, false);
+    Logger.log("xPIDSpeed{-40;40}", xPIDSpeed, false);
+    Logger.log("yAngle{90;270}", yAngle, false);
+    Logger.log("yPIDSpeed{-40;40}", yPIDSpeed, true);
 }
 
 

@@ -2,6 +2,7 @@
 // Created by Alabay on 11.12.13.
 //
 
+#include <avr/eeprom.h>
 #include "SDLogger.h"
 
 
@@ -13,7 +14,6 @@ uint8_t const SPI_HALF_SPEED = 1;
 uint8_t const SPI_QUARTER_SPEED = 2;
 
 bool errorCaused = false;
-const int SECTOR_SIZE = 512;
 const char * UNIQUE_DELIMITER = "$$\0";
 const char * END_DELIMITER = "\n\0";
 const char * VALUE_SEPARATOR = ",";
@@ -34,17 +34,21 @@ static  uint8_t spiRec(void) {
 }
 
 
-boolean SDLogger::begin(uint8_t loggerType, uint16_t logUniqueNumber)
+boolean SDLogger::begin(uint8_t loggerType)
 {
     this->loggerType = loggerType;
-    this->logUniqueNumber = logUniqueNumber;
+    /**
+     * TODO: autodetect?
+     */
     if(loggerType == LOGGER_SD_CARD)
     {
+        int address = 1;
+        this->logUniqueNumber = eeprom_read_byte((unsigned char *) address);
+        eeprom_write_byte((unsigned char *) address, (this->logUniqueNumber > 250) ? (uint8_t)0x0 : this->logUniqueNumber + 1);
         sdCardInited = initCard();
     }
     else if(loggerType == LOGGER_SERIAL)
     {
-        Serial.begin(115200);
         sdCardInited = true;
     }
     return sdCardInited;
@@ -194,7 +198,7 @@ void SDLogger::initSpi(void)
  * \return The value one, true, is returned for success and
  * the value zero, false, is returned for failure.
  */
-uint8_t SDLogger::writeBlock(uint32_t blockNumber, const uint8_t* src) {
+uint8_t SDLogger::writeBlock(uint32_t blockNumber, const uint8_t* src, uint8_t significantBytes) {
 #if SD_PROTECT_BLOCK_ZERO
   // don't allow write to first block
   if (blockNumber == 0) {
@@ -209,7 +213,7 @@ uint8_t SDLogger::writeBlock(uint32_t blockNumber, const uint8_t* src) {
         error(SD_CARD_ERROR_CMD24);
         goto fail;
     }
-    if (!writeData(DATA_START_BLOCK, src)) goto fail;
+    if (!writeData(DATA_START_BLOCK, src, significantBytes)) goto fail;
 
     // wait for flash programming to complete
     if (!waitNotBusy(SD_WRITE_TIMEOUT)) {
@@ -231,17 +235,27 @@ uint8_t SDLogger::writeBlock(uint32_t blockNumber, const uint8_t* src) {
 
 //------------------------------------------------------------------------------
 // send one block of data for write block or write multiple blocks
-uint8_t SDLogger::writeData(uint8_t token, const uint8_t* src) {
+uint8_t SDLogger::writeData(uint8_t token, const uint8_t* src, uint8_t significantBytes) {
 
     // send data - optimized loop
     SPDR = token;
 
     // send two byte per iteration
-    for (uint16_t i = 0; i < 512; i += 2) {
+    for (uint16_t i = 0; i < significantBytes; i++) {
         while (!(SPSR & (1 << SPIF)));
         SPDR = src[i];
+        //while (!(SPSR & (1 << SPIF)));
+        //SPDR = src[i+1];
+    }
+
+    /**
+     * 512 bytes must be written
+     */
+    for (uint16_t i = 0; i < 512 - significantBytes; i++) {
         while (!(SPSR & (1 << SPIF)));
-        SPDR = src[i+1];
+        SPDR = 0;
+        //while (!(SPSR & (1 << SPIF)));
+        //SPDR = 0;
     }
 
     // wait for last data byte
@@ -276,19 +290,6 @@ void SDLogger::log(String str, bool endOfLine)
         return ;
     }
 
-    if(errorCaused)
-    {
-        Serial.print("MAEC"); //Memory allocation error caused
-        return;
-    }
-
-    /**
-     * Подсчет кол-ва места необходимого для выделения лог-строки
-     */
-    char const * temp = str.c_str();
-    int buffer_length = strlen(temp);
-
-    char * number = NULL;
     if(startWithNumber)
     {
         /**
@@ -299,62 +300,21 @@ void SDLogger::log(String str, bool endOfLine)
         /**
          * Перевод числа в строку
          */
+        char * number = NULL;
         int numberLen = 5 + 1; //65535 has 5 chars + 1 null-terminated
         number = (char *) malloc(sizeof(char) * numberLen);
-        sprintf(number,"%d",logUniqueNumber);
+        sprintf(number, "%d", logUniqueNumber);
 
-        buffer_length += strlen(number) + strlen(UNIQUE_DELIMITER);
-    }
-
-
-    buffer_length += 1; //null termination
-    if(endOfLine)
-    {
-        buffer_length += strlen(END_DELIMITER);
-    }
-    int lastChar = 0;
-
-    if(buffer == NULL)
-    {
         /**
-        * Первый раз выделяем память
+        * Объединение строк в одну
         */
-        buffer = (char *) malloc(sizeof(char) * buffer_length );
-        if(buffer == NULL)
-        {
-            errorCaused = true;
-            return;
-        }
-    }
-    else
-    {
-        /**
-        * Перераспределяем пространство под новую длину буфера
-        */
-        buffer_length += strlen(buffer);
-        buffer = (char *) realloc(buffer, sizeof(char) * buffer_length );
-        lastChar = buffer_length;
-        if(buffer == NULL)
-        {
-            errorCaused = true;
-            return;
-        }
-    }
-
-    buffer[lastChar] = '\0';
-
-
-    /**
-    * Объединение строк в одну
-    */
-    if(startWithNumber)
-    {
         strcat(buffer, number);
         free( number );
         strcat(buffer, UNIQUE_DELIMITER);
         startWithNumber = false;
     }
-    strcat(buffer, temp);
+
+    strcat(buffer, str.c_str());
 
     if(endOfLine)
     {
@@ -362,66 +322,43 @@ void SDLogger::log(String str, bool endOfLine)
 
         //TODO: need refactoring
         startWithNumber = (loggerType == LOGGER_SD_CARD);
-    }
 
-    if(loggerType == LOGGER_SD_CARD)
-    {
-        flushSdCard(buffer_length);
-    }
-    else if(loggerType == LOGGER_SERIAL)
-    {
-        if(endOfLine)
+
+        /**
+         * Flush only if end of line
+         */
+        messagesCounter++;
+        if(messagesCounter >= MESSAGES_COUNT_FLUSH)
         {
-            /**
-             * Flush only if string is ready
-             */
-            flushSerial();
+            flush(buffer);
+            messagesCounter = 0;
         }
     }
+
+
 }
 
-void SDLogger::flushSdCard(int buffer_length)
+void SDLogger::flush(char * source)
 {
-    //TODO: maybe buffer_length instead of strlen?
-    while(strlen(buffer) >= SECTOR_SIZE)
+    if(loggerType == LOGGER_SD_CARD)
     {
-        /**
-        * writeBlock не запишет больше 512 байт (блок) из buffer. Это нам и нужно
-        */
-        if(writeBlock(currentBlock, (unsigned char*)buffer))
+        if(writeBlock(currentBlock, (uint8_t *)source, (uint8_t)strlen(source)))
         {
             //Serial.print(".");
             currentBlock++;
         }
         else
         {
-            //Serial.print(":( ");
+            //Serial.print("Error: ");
+            //Serial.println(errorCode_, HEX);
         }
-
-        int offsetLen = buffer_length - SECTOR_SIZE;
-
-
-        buffer = (char *) memmove(buffer, buffer + SECTOR_SIZE, offsetLen);
-        buffer = (char *) realloc(buffer, sizeof(char)*(offsetLen));
-        if(buffer == NULL)
-        {
-            errorCaused = true;
-            return;
-        }
-
-        buffer[offsetLen] = '\0';
     }
-}
+    else if(loggerType == LOGGER_SERIAL)
+    {
+        Serial.print(source);
+    }
 
-void SDLogger::flushSerial()
-{
-    Serial.print(buffer);
-
-    /**
-     * Очищаем буфер для следующих строк
-     */
-    free(buffer);
-    buffer = NULL;
+    source[0] = '\0';
 }
 
 
@@ -433,42 +370,8 @@ void SDLogger::log(String columnName, double value, bool endOfLine)
         return ;
     }
 
-    String tempValue = String((long)value);
-
-    int millisLen = 0;
-
-    String millisBetweenPack;
-    if(endOfLine)
-    {
-        millisBetweenPack = "|";
-        millisBetweenPack.concat(millis());
-
-        millisLen = millisBetweenPack.length();
-    }
-
-
     if(!columnNamesInited)
     {
-        int lastChar = 0;
-        int comaLen = (endOfLine) ? 0 : 1;
-
-
-        if(firstDataLineBuffer == NULL)
-        {
-            firstDataLineBuffer = (char *) malloc(sizeof(char) * tempValue.length() + 1 + comaLen + millisLen); //null-term + ","
-        }
-        else
-        {
-            int len = strlen(firstDataLineBuffer) + tempValue.length() + 1 + comaLen + millisLen;
-            lastChar = len;
-            firstDataLineBuffer = (char *) realloc(firstDataLineBuffer, sizeof(char)*(len));
-        }
-        firstDataLineBuffer[lastChar] = '\0';
-
-        char const * temp = tempValue.c_str();
-        strcat(firstDataLineBuffer, temp);
-
-
         if(isFirstColumn)
         {
             isFirstColumn = false;
@@ -477,41 +380,51 @@ void SDLogger::log(String columnName, double value, bool endOfLine)
             columnName = header;
         }
 
-        if(!endOfLine)
-        {
-            /**
-             * Если строка не последняя, то добавляем запятую
-             */
-            strcat(firstDataLineBuffer, VALUE_SEPARATOR);
+        headerColumns.concat(columnName);
 
-
-            columnName.concat(VALUE_SEPARATOR);
-        }
-
-        /**
-         * Накапливаем колонки
-         */
-        log(columnName, endOfLine);
         if(endOfLine)
         {
             columnNamesInited = true;
 
-            char const * millistemp = millisBetweenPack.c_str();
-            strcat(firstDataLineBuffer, millistemp);
+            headerColumns.concat(END_DELIMITER);
 
-            log(firstDataLineBuffer, endOfLine);
-            free(firstDataLineBuffer);
+            /**
+             * Flush headers manually
+             */
+            if(loggerType == LOGGER_SD_CARD)
+            {
+                Serial.print("Header columns: ");
+                Serial.println(headerColumns);
+                flush((char *)headerColumns.c_str());
+            }
+            else if(loggerType == LOGGER_SERIAL)
+            {
+                //TODO:
+            }
+
+            headerColumns = NULL;
+        }
+        else
+        {
+            /**
+             * Если строка не последняя, то добавляем запятую
+             */
+            headerColumns.concat(VALUE_SEPARATOR);
         }
     }
     else
     {
+        String tempValue = String((long)value);
+
+
         if(!endOfLine)
         {
             tempValue.concat(VALUE_SEPARATOR);
         }
         else
         {
-            tempValue.concat(millisBetweenPack);
+            tempValue.concat("|");
+            tempValue.concat(millis());
         }
 
         log(tempValue, endOfLine);

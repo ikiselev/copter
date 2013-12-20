@@ -133,24 +133,34 @@ uint8_t const SD_CARD_TYPE_SD2 = 2;
 /** High Capacity SD card */
 uint8_t const SD_CARD_TYPE_SDHC = 3;
 
+
+
+const int BUFFER_SIZE = 150;
+const int MESSAGES_COUNT_FLUSH = 5;
+
+
 class SDLogger {
 public:
-    boolean begin(uint8_t, uint16_t);
-    void log(String str, bool endOfLine = false);
+    boolean begin(uint8_t);
     void log(String columnName, double value, bool endOfLine = false);
 
 
     SDLogger() :
-    startWithNumber((loggerType == LOGGER_SD_CARD)), //TODO: refactor?
+    startWithNumber(true),
     columnNamesInited(false),
     sdCardInited(false),
     isFirstColumn(true),
     currentBlock(1),
-    loggerType(LOGGER_NONE),
-    buffer(NULL),
-    firstDataLineBuffer(NULL)
+    loggerType(LOGGER_NONE)
     {
+        char buffer[BUFFER_SIZE] = "";
+        headerColumns = "";
+        messagesCounter = 0;
+    }
 
+
+    void setCurrentBlock(uint32_t currentBlock) {
+        SDLogger::currentBlock = currentBlock;
     }
 
 private:
@@ -160,13 +170,13 @@ private:
      * Буфер для отправки на карту.
      * Данные записываются как только накопится SECTOR_SIZE байт
      */
-    char * buffer;
-    /**
-     * Используется для хранения данных из первой колоки
-     * до того как все имена колонок не отправятся
-     */
-    char * firstDataLineBuffer;
-    uint16_t logUniqueNumber;
+    char buffer[BUFFER_SIZE]; // + 1 null-terminator
+
+    String headerColumns;
+
+    int messagesCounter;
+
+    uint8_t logUniqueNumber;
     uint32_t currentBlock;
     bool startWithNumber;
     boolean columnNamesInited;
@@ -202,15 +212,15 @@ private:
 
     boolean initCard();
 
-    uint8_t writeData(uint8_t token, uint8_t const *src);
+    uint8_t writeData(uint8_t token, uint8_t const *src, uint8_t significantBytes);
 
-    uint8_t writeBlock(uint32_t blockNumber, uint8_t const *src);
+    uint8_t writeBlock(uint32_t blockNumber, uint8_t const *src, uint8_t significantBytes);
 
     uint8_t type(void) const {return type_;}
 
-    void flushSdCard(int);
+    void log(String str, bool endOfLine = false);
 
-    void flushSerial();
+    void flush(char * source);
 };
 
 extern SDLogger Logger;
