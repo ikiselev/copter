@@ -2,6 +2,7 @@
 // Created by Alabay on 11.12.13.
 //
 
+#include "stdlib.h"
 #include <avr/eeprom.h>
 #include "SDLogger.h"
 
@@ -282,7 +283,7 @@ void SDLogger::chipSelectLow(void) {
 }
 
 
-void SDLogger::log(String str, bool endOfLine)
+void SDLogger::log(char * str, bool endOfLine)
 {
     if(!sdCardInited)
     {
@@ -314,7 +315,7 @@ void SDLogger::log(String str, bool endOfLine)
         startWithNumber = false;
     }
 
-    strcat(buffer, str.c_str());
+    strcat(buffer, str);
 
     if(endOfLine)
     {
@@ -349,15 +350,19 @@ void SDLogger::flush(char * source)
 {
     if(loggerType == LOGGER_SD_CARD)
     {
+        #if DEBUG_ENABLE
+        if(strlen(source) > BUFFER_SIZE)
+        {
+            debug("Source is bigger than buffer size. DATA CORRUPTED");
+        }
+        #endif
         if(writeBlock(currentBlock, (uint8_t *)source, (uint8_t)strlen(source)))
         {
-            //Serial.print(".");
             currentBlock++;
         }
         else
         {
-            //Serial.print("Error: ");
-            //Serial.println(errorCode_, HEX);
+            debug("Error writing to SD");
         }
     }
     else if(loggerType == LOGGER_SERIAL)
@@ -369,7 +374,7 @@ void SDLogger::flush(char * source)
 }
 
 
-void SDLogger::log(String columnName, double value, bool endOfLine)
+void SDLogger::log(String columnName, float value, bool endOfLine)
 {
     if(!sdCardInited)
     {
@@ -412,19 +417,22 @@ void SDLogger::log(String columnName, double value, bool endOfLine)
     }
     else
     {
-        String tempValue = String((long)value);
-
+        char buf[20] = "";
+        dtostrf(value, 0, 2, buf);
 
         if(!endOfLine)
         {
-            tempValue.concat(VALUE_SEPARATOR);
+            strcat(buf, VALUE_SEPARATOR);
         }
         else
         {
-            tempValue.concat("|");
-            tempValue.concat(millis());
+            strcat(buf, "|");
+
+            char number[6];
+            sprintf(number, "%d", millis());
+            strcat(buf, number);
         }
 
-        log(tempValue, endOfLine);
+        log(buf, endOfLine);
     }
 }

@@ -132,14 +132,14 @@ uint8_t const SD_CARD_TYPE_SDHC = 3;
 
 
 
-const int BUFFER_SIZE = 150;
+const int BUFFER_SIZE = 200;
 const int MESSAGES_COUNT_FLUSH = 5;
 
 
 class SDLogger {
 public:
     boolean begin(uint8_t);
-    void log(String columnName, double value, bool endOfLine = false);
+    void log(String columnName, float value, bool endOfLine = false);
 
 
     SDLogger() :
@@ -215,7 +215,7 @@ private:
 
     uint8_t type(void) const {return type_;}
 
-    void log(String str, bool endOfLine = false);
+    void log(char * str, bool endOfLine = false);
 
     void flush(char * source);
 };
