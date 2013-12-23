@@ -9,7 +9,7 @@ struct Config
     /**
      * Тип логгера
      */
-    static const uint8_t loggerType = LOGGER_SERIAL;
+    static const uint8_t loggerType = LOGGER_SD_CARD;
     /**
      * SD Card Start block
      */
@@ -20,7 +20,7 @@ struct Config
      * В миллисекундах
      * 0 - не выключаться
      */
-    static const int flightTime = 8000;
+    static const int flightTime = 20000;
 
 
     /**
@@ -35,13 +35,13 @@ struct Config
      * Возможность задать силу тяги
      * От 0 до 255
      */
-    double xSpeed = 40;
-    double ySpeed = 40;
+    double xSpeed = 15;
+    double ySpeed = 15;
 
     /**
      * ПИД максимальные значения (+-)
      */
-    static const double pidOutputLimits = 90;
+    static const float pidOutputLimits = 90;
 
 
     /**
@@ -58,32 +58,37 @@ struct Config
      * X: 181
      * Y:177
      */
-    static const int xOffsetIMU = -1;
-    static const int yOffsetIMU = +3;
+    static const int xOffsetIMU = +2;
+    static const int yOffsetIMU = -5;
 
 
     /**
      * Цель для ПИД-регулятора стремиться к этим значениям
      * чтобы сохранить свое положение в пространстве.
      */
-    double targetAngleX = 180.0;
-    double targetAngleY = 180.0;
+    float targetAngleX = 180.0;
+    float targetAngleY = 180.0;
 
 
     /**
      * Настройка выводов моторов
      */
-    static const uint8_t esc_x1_pin = 3;
-    static const uint8_t esc_x2_pin = 6;
+    static const uint8_t esc_x1_pin = 5;
+    static const uint8_t esc_x2_pin = 9;
     //Y-axis
-    static const uint8_t esc_y1_pin = 5;
-    static const uint8_t esc_y2_pin = 9; //Pin with led
+    static const uint8_t esc_y1_pin = 3;
+    static const uint8_t esc_y2_pin = 6; //Pin with led
 
     /**
      * Вывод МК на светодиод.
      * К сожалению, в данном коптере он подключен к мотору
      */
-    static const int ledPin = esc_y2_pin;
+    static const int ledPin = 9;
+
+    static const uint8_t batteryAnalogPing = 1;
+    static const uint8_t batteryFull = 690; //4.2V - 0.8v drop-down (170)
+    static const uint8_t batteryLow = 608; // 3.8V - 0.8v drop-down
+    //static const uint8_t batteryLow = 500; // 3.3V - 0.8v drop-down
 };
 
 extern Config config;

@@ -16,6 +16,9 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/build" />
     </content>
+    <content url="file:///usr/local/CrossPack-AVR-20131216/avr/include">
+      <sourceFolder url="file:///usr/local/CrossPack-AVR-20131216/avr/include" isTestSource="false" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
