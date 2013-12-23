@@ -374,7 +374,7 @@ void SDLogger::flush(char * source)
 }
 
 
-void SDLogger::log(String columnName, float value, bool endOfLine)
+void SDLogger::log(const char * columnName, float value, bool endOfLine)
 {
     if(!sdCardInited)
     {
@@ -384,15 +384,16 @@ void SDLogger::log(String columnName, float value, bool endOfLine)
 
     if(!columnNamesInited)
     {
+        String columnNameString = String(columnName);
         if(isFirstColumn)
         {
             isFirstColumn = false;
             String header = String("Columns:");
             header += columnName;
-            columnName = header;
+            columnNameString = header;
         }
 
-        headerColumns.concat(columnName);
+        headerColumns.concat(columnNameString);
 
         if(endOfLine)
         {
@@ -428,8 +429,8 @@ void SDLogger::log(String columnName, float value, bool endOfLine)
         {
             strcat(buf, "|");
 
-            char number[6];
-            sprintf(number, "%d", millis());
+            char number[8];
+            sprintf(number, "%lu", millis());
             strcat(buf, number);
         }
 
