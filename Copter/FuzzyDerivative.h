@@ -7,6 +7,21 @@
 #define __FuzzyDerivative_H_
 #include "Arduino.h"
 
+/**
+ * TODO: hardcode magic numbers
+ * Соглашение: каждое правило состоит из двух значений термов переменных
+ * Первый терм: Ошибка рассогласования
+ * Второй: угловая скорость
+ */
+typedef struct condition { uint8_t set[2]; } condition;
+
+
+typedef struct rule
+{
+    int conditionCount;
+    condition * conditions;
+} Rule;
+
 class FuzzyDerivative
 {
     /**
@@ -77,44 +92,11 @@ class FuzzyDerivative
             {0.8, 0.85, 1, 1} //OUTPUT_HIGH
     };
 
-    /**
-     * TODO: hardcode magic numbers
-     * На данном микроконтроллере с 2 кб ОЗУ захардкожено
-     * Соглашение: каждое правило состоит из двух значений термов переменных
-     * Первый терм: Ошибка рассогласования
-     * Второй: угловая скорость
-     *
-     * В каждом правиле может быть не обязательно 4 элемента, но мы считаем, что это сейчас нормально
-     */
-    static const int combinationsPerOutTerm = 4;
 
 
-    uint8_t rules[output_term_count][combinationsPerOutTerm][2] = {
-        /*
-         * RULE_OUTPUT_LOW
-         *
-         **/
-        {{ERROR_LOW, OMEGA_LOW}, {ERROR_LOW, OMEGA_LOW}, {ERROR_LOW, OMEGA_LOW}, {ERROR_LOW, OMEGA_LOW}},
+    float noRuleReturnValue = 1;
 
-        /*
-         * RULE_OUTPUT_SMALL
-         *
-         **/
-        {{ERROR_MID, OMEGA_LOW}, {ERROR_LOW, OMEGA_LOW}, {ERROR_LOW, OMEGA_LOW}, {ERROR_LOW, OMEGA_LOW}},
-
-        /*
-         * RULE_OUTPUT_MID
-         *
-         **/
-        {{ERROR_LOW, OMEGA_LOW}, {ERROR_LOW, OMEGA_LOW}, {ERROR_LOW, OMEGA_LOW}, {ERROR_LOW, OMEGA_LOW}},
-
-        /*
-         * RULE_OUTPUT_HIGH
-         *
-         **/
-        {{ERROR_LOW, OMEGA_LOW}, {ERROR_LOW, OMEGA_LOW}, {ERROR_LOW, OMEGA_LOW}, {ERROR_LOW, OMEGA_LOW}}
-    };
-
+    Rule rules[output_term_count];
     float blockCenter[output_term_count] = {0};
 
 public:
@@ -125,19 +107,6 @@ public:
         int IntCount = 100;
         for(int i=0; i < output_term_count; i++)
         {
-            /*float dx = (output[i][3] - output[i][0]) / IntCount;
-            float x = output[i][0];
-            float sum_RI = 0;
-            float sum_i = 0;
-            for(int j = 0; j < IntCount; j++)
-            {
-                x = x + dx * j;
-                float m_i = TrapezoidalMF(x, output[i][0], output[i][1], output[i][2], output[i][3]);
-                sum_RI += x * m_i;
-                sum_i += m_i;
-            }
-
-            blockCenter[i] = sum_RI / sum_i;*/
 
             float a = output[i][2] - output[i][1];
             float b = output[i][3] - output[i][0];
@@ -145,6 +114,43 @@ public:
 
             blockCenter[i] = (2 * a * c  +  a * 2  +  c * b  +  a * b  +  b * b) / 3 * (a + b);
         }
+
+
+
+
+        /*
+         * RULE_OUTPUT_LOW
+         *
+         **/
+        static condition conditions_low[] = {{ERROR_LOW, OMEGA_LOW}, {ERROR_MID, OMEGA_LOW}, {ERROR_HIGH, OMEGA_LOW}, {ERROR_VHIGH, OMEGA_LOW}, {ERROR_VHIGH, OMEGA_VHIGH}};
+        static const Rule rule_output_low = {.conditionCount = sizeof(conditions_low) / sizeof(condition), .conditions = conditions_low};
+
+        /*
+         * RULE_OUTPUT_SMALL
+         *
+         **/
+        static condition conditions_small[] = {{ERROR_HIGH, OMEGA_MID}, {ERROR_VHIGH, OMEGA_MID}};
+        static const Rule rule_output_small = {.conditionCount = sizeof(conditions_small) / sizeof(condition), .conditions = conditions_small};
+
+        /*
+         * RULE_OUTPUT_MID
+         *
+         **/
+        static condition conditions_mid[] = {{ERROR_LOW, OMEGA_MID}, {ERROR_MID, OMEGA_MID}, {ERROR_LOW, OMEGA_HIGH}, {ERROR_MID, OMEGA_HIGH}, {ERROR_HIGH, OMEGA_HIGH}, {ERROR_VHIGH, OMEGA_HIGH}};
+        static const Rule rule_output_mid = {.conditionCount = sizeof(conditions_mid) / sizeof(condition), .conditions = conditions_mid};
+
+        /*
+         * RULE_OUTPUT_HIGH
+         *
+         **/
+        static condition conditions_high[] = {{ERROR_LOW, OMEGA_VHIGH}, {ERROR_MID, OMEGA_VHIGH}, {ERROR_HIGH, OMEGA_VHIGH}};
+        static const Rule rule_output_high = {.conditionCount = sizeof(conditions_high) / sizeof(condition), .conditions = conditions_high};
+
+
+        rules[0] = rule_output_low;
+        rules[1] = rule_output_small;
+        rules[2] = rule_output_mid;
+        rules[3] = rule_output_high;
     }
 
 
