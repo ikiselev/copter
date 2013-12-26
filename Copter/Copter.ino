@@ -130,6 +130,12 @@ void motorsOff() {
 
 
 bool checkBattery() {
+    if(!config.checkBatteryAtStartup)
+    {
+
+        return true;
+    }
+
     int checks = 10;
     float checkValue = 0;
     for(int i=0; i < checks; i++)

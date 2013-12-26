@@ -20,15 +20,16 @@ struct Config
      * В миллисекундах
      * 0 - не выключаться
      */
-    static const int flightTime = 20000;
+    static const uint32_t flightTime = 35000;
 
+    static const bool checkBatteryAtStartup = true;
 
     /**
      * Ожидание перед началом стабилизации.
      * После того как подключено питание стабилизация
      * начнется не сразу, а после этого времени.
      */
-    static const int heatUpTime = 3000;
+    static const uint32_t heatUpTime = 3000;
 
 
     /**
