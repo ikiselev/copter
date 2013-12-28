@@ -1,4 +1,5 @@
 #include "Arduino.h"
+#define MAIN_FILE
 
 #include "config.h"
 
@@ -10,8 +11,6 @@
 
 IMUFilter imu;
 
-bool allowFly = true;
-
 float angles[3];
 
 float xAngle, yAngle;
@@ -20,29 +19,41 @@ float xAngle, yAngle;
 float xPIDSpeed;
 float yPIDSpeed;
 
-
-PID xPID(&xAngle, &xPIDSpeed, &config.targetAngleX, 0.6, 0.2, 0.12);
-PID yPID(&yAngle, &yPIDSpeed, &config.targetAngleY, 0.6, 0.2, 0.12);
+/**
+ * Best tunings with fuzzy-logic on ropes:
+ * 0.3, 0.2, 0.14
+ */
+PID xPID(&xAngle, &xPIDSpeed, &config.targetAngleX, 0.3, 0.2, 0.14);
+PID yPID(&yAngle, &yPIDSpeed, &config.targetAngleY, 0.3, 0.2, 0.14);
 
 void motorsOff();
 bool checkBattery();
 
 
+double xCopterSpeed = config.xSpeedStart;
+double yCopterSpeed = config.ySpeedStart;
+
+double xSpeedStep = 0;
+double ySpeedStep = 0;
+
+unsigned long now;
+
 void setup() {
+    #if DEBUG_ENABLE
     Serial.begin(115200);
+    #endif
 
     if(!checkBattery())
     {
-        debug("Low battery voltage");
-        allowFly = false;
-        return ;
+        debug(P("Low battery voltage"));
+        while(1);
     }
 
     Wire.begin();
 
 
-    if (!Logger.begin(config.loggerType)) {
-        debug("Logger initialization failed! Working without logging");
+    if (!Logger.begin()) {
+        debug(P("Logger initialization failed!"));
     }
     Logger.setCurrentBlock(config.sdCardStartBlock_config);
 
@@ -58,19 +69,30 @@ void setup() {
 
     xPID.setLimits(-config.pidOutputLimits, config.pidOutputLimits);
     yPID.setLimits(-config.pidOutputLimits, config.pidOutputLimits);
+
+    /**
+     * Step in one millisecond for take-off
+     */
+    if(config.ySpeedStart != config.ySpeed)
+    {
+        ySpeedStep = (config.ySpeed - config.ySpeedStart) / config.takeoffTime;
+    }
+    if(config.xSpeedStart != config.xSpeed)
+    {
+        xSpeedStep = (config.xSpeed - config.xSpeedStart) / config.takeoffTime;
+    }
+
+    now = millis();
 }
 
 
 
 void loop()
 {
-    if(!allowFly)
-    {
-        motorsOff();
-        return;
-    }
+    unsigned long lastMillis = now;
+    now = millis();
 
-    if(config.flightTime > 0 && millis() > config.flightTime + config.heatUpTime)
+    if(config.flightTime > 0 && now > config.flightTime + config.heatUpTime + config.takeoffTime)
     {
         motorsOff();
         return;
@@ -88,34 +110,41 @@ void loop()
         return;
     }
 
-    if(millis() < config.heatUpTime)
+    if(now < config.heatUpTime)
     {
         return;
     }
 
-
-
-
-
     xPID.Compute();
     yPID.Compute();
 
+    analogWrite(config.esc_x1_pin, constrain(xCopterSpeed - xPIDSpeed / 2, 0, 255));
+    analogWrite(config.esc_x2_pin, constrain(xCopterSpeed + xPIDSpeed / 2, 0, 255));
 
-    analogWrite(config.esc_x1_pin, constrain(config.xSpeed - xPIDSpeed / 2, 0, 255));
-    analogWrite(config.esc_x2_pin, constrain(config.xSpeed + xPIDSpeed / 2, 0, 255));
-
-    analogWrite(config.esc_y1_pin, constrain(config.ySpeed - yPIDSpeed / 2, 0, 255));
-    analogWrite(config.esc_y2_pin, constrain(config.ySpeed + yPIDSpeed / 2, 0, 255));
+    analogWrite(config.esc_y1_pin, constrain(yCopterSpeed - yPIDSpeed / 2, 0, 255));
+    analogWrite(config.esc_y2_pin, constrain(yCopterSpeed + yPIDSpeed / 2, 0, 255));
 
     //Logging
-    Logger.log("p{-50;50}", xPID.p, false);
-    Logger.log("i{-50;50}", xPID.i, false);
-    Logger.log("d{-50;50}", xPID.d, false);
-    Logger.log("s{-16;16}", xPID.s, false);
-    Logger.log("xAngle{90;270}", xAngle, false);
-    Logger.log("xPIDSpeed{-40;40}", xPIDSpeed, false);
-    Logger.log("yAngle{90;270}", yAngle, false);
-    Logger.log("xPIDSpeed{-40;40}", yPIDSpeed, true);
+    Logger.log(FIELD_GYRO_Z, imu.getGyroZ(), false);
+    Logger.log(FIELD_X_ANGLE, xAngle, false);
+    Logger.log(FIELD_Y_ANGLE, yAngle, false);
+    Logger.log(FIELD_X_PID_SPEED, xPIDSpeed, false);
+    Logger.log(FIELD_Y_PID_SPEED, yPIDSpeed, true);
+
+    /**
+     * Smooth take-off
+     */
+    if(xCopterSpeed < config.xSpeed)
+    {
+        xCopterSpeed += (now - lastMillis) * xSpeedStep;
+        if(xCopterSpeed > config.xSpeed) xCopterSpeed = config.xSpeed;
+    }
+
+    if(yCopterSpeed < config.ySpeed)
+    {
+        yCopterSpeed += (now - lastMillis) * ySpeedStep;
+        if(yCopterSpeed > config.ySpeed) yCopterSpeed = config.ySpeed;
+    }
 }
 
 
@@ -146,6 +175,8 @@ bool checkBattery() {
     checkValue /= checks;
 
 
+
+    debug(P("Battery: "), checkValue);
     if(checkValue < config.batteryLow)
     {
 

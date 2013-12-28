@@ -7,10 +7,6 @@
 struct Config
 {
     /**
-     * Тип логгера
-     */
-    static const uint8_t loggerType = LOGGER_SD_CARD;
-    /**
      * SD Card Start block
      */
     static const uint32_t sdCardStartBlock_config = 1025;
@@ -20,8 +16,17 @@ struct Config
      * В миллисекундах
      * 0 - не выключаться
      */
-    static const uint32_t flightTime = 35000;
+    static const uint32_t flightTime = 2000;
+    /**
+     * Время постепенного взлета.
+     * Время набирания оборотов с xSpeedStart до xSpeed
+     */
+    static const uint32_t takeoffTime = 1500;
 
+    /**
+     * Проверять ли напряжение на батарейке.
+     * Полезно при отладке только по Serial ставить в false
+     */
     static const bool checkBatteryAtStartup = true;
 
     /**
@@ -36,8 +41,11 @@ struct Config
      * Возможность задать силу тяги
      * От 0 до 255
      */
-    double xSpeed = 15;
-    double ySpeed = 15;
+    double xSpeed = 190;
+    double ySpeed = 190;
+
+    double xSpeedStart = 55;
+    double ySpeedStart = 55;
 
     /**
      * ПИД максимальные значения (+-)
@@ -46,7 +54,7 @@ struct Config
 
 
     /**
-     * Fail-safe
+     * TODO: Fail-safe
      * Отключение моторов, если угл наклона превысил допустимый предел
      */
     static const int failsafeAngle = 90;
@@ -55,12 +63,9 @@ struct Config
     /**
      * Калибровка угла плоскости припаянной инерциальной сборки на коптере
      * по отношению к плоскости коптера.
-     * На ровной поверхности
-     * X: 181
-     * Y:177
      */
-    static const int xOffsetIMU = +2;
-    static const int yOffsetIMU = -5;
+    static const int xOffsetIMU = 0;
+    static const int yOffsetIMU = 0;
 
 
     /**
@@ -87,8 +92,8 @@ struct Config
     static const int ledPin = 9;
 
     static const uint8_t batteryAnalogPing = 1;
-    static const uint8_t batteryFull = 690; //4.2V - 0.8v drop-down (170)
-    static const uint8_t batteryLow = 608; // 3.8V - 0.8v drop-down
+    static const uint16_t batteryFull = 690; //4.2V - 0.8v drop-down (170)
+    static const uint16_t batteryLow = 608; // 3.8V - 0.8v drop-down
     //static const uint8_t batteryLow = 500; // 3.3V - 0.8v drop-down
 };
 
