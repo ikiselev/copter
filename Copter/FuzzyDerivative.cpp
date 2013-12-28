@@ -60,7 +60,7 @@ float FuzzyDerivative::execute(float error, float omega)
 
     for (int i=0; i < output_term_count; i++)
     {
-        Rule *rule = &rules[i];
+        const Rule *rule = rules[i];
 
 
         for(int j=0; j < rule->conditionCount; j++)
@@ -76,12 +76,12 @@ float FuzzyDerivative::execute(float error, float omega)
 
             int thruth_e_index = rule->conditions[j].set[0];
             int thruth_o_index = rule->conditions[j].set[1];
-            float val = min(thruth_error[thruth_e_index], thruth_omega[thruth_o_index]);
+            float val = (float)fmin(thruth_error[thruth_e_index], thruth_omega[thruth_o_index]);
 
 
             if(val != 0)
             {
-                Accumulation[i] = max(Accumulation[i], val);
+                Accumulation[i] = (float)fmax(Accumulation[i], val);
             }
         }
 
@@ -103,3 +103,5 @@ float FuzzyDerivative::execute(float error, float omega)
 
     return SumRI / allWeight;
 }
+
+FuzzyDerivative fuzzyDerivative;
