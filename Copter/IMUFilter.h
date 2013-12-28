@@ -1,9 +1,3 @@
-//
-// Created by Alabay on 04.12.13.
-//
-
-
-
 #include "ITG3205.h"
 #include "bma180i.h"
 
@@ -35,6 +29,12 @@ public:
     void updateAHRS(float gx, float gy, float gz, float ax, float ay, float az);
     void getEuler(float* angles);
     void getRPY(float* angles);
+
+    int getGyroX();
+
+    int getGyroY();
+
+    int getGyroZ();
 };
 
 // inverted sqrt taken from quake3

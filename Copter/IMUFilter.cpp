@@ -1,8 +1,7 @@
-
-
 #include "IMUFilter.h"
 /**
   * Straight DCM implementation based on FreeIMU
+  * TODO: fastRotations integral windup: realize gentlenav.googlecode.com/files/fastRotations.pdf
   *
   */
 
@@ -47,7 +46,7 @@ IMUFilter::IMUFilter() {
   */
 void IMUFilter::init() {
     accel.BMA180_Init();
-    accel.BMA180_SetBandwidth(BMA180_BANDWIDTH_75HZ);
+    accel.BMA180_SetBandwidth(BMA180_BANDWIDTH_20HZ);
     accel.BMA180_SetRange(BMA180_RANGE_4G);
 
     delay(250);
@@ -65,6 +64,21 @@ void IMUFilter::getReadings() {
     accel.readAcc();
 }
 
+
+int IMUFilter::getGyroX()
+{
+    return gyro.g.x;
+}
+
+int IMUFilter::getGyroY()
+{
+    return gyro.g.y;
+}
+
+int IMUFilter::getGyroZ()
+{
+    return gyro.g.z;
+}
 
 /**
   * Computes the euler angles derived from the quaternion
