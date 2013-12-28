@@ -5,6 +5,7 @@
 #include "stdlib.h"
 #include <avr/eeprom.h>
 #include "SDLogger.h"
+#include "config.h"
 
 
 /** Set SCK to max rate of F_CPU/2. See Sd2Card::setSckRate(). */
@@ -35,23 +36,18 @@ static  uint8_t spiRec(void) {
 }
 
 
-boolean SDLogger::begin(uint8_t loggerType)
+boolean SDLogger::begin()
 {
-    this->loggerType = loggerType;
-    /**
-     * TODO: autodetect?
-     */
-    if(loggerType == LOGGER_SD_CARD)
-    {
-        int address = 1;
-        this->logUniqueNumber = eeprom_read_byte((unsigned char *) address);
-        eeprom_write_byte((unsigned char *) address, (this->logUniqueNumber > 250) ? (uint8_t)0x0 : this->logUniqueNumber + 1);
-        sdCardInited = initCard();
-    }
-    else if(loggerType == LOGGER_SERIAL)
-    {
-        sdCardInited = true;
-    }
+    #if LOGGER_SD_CARD
+    int address = 1;
+    this->logUniqueNumber = eeprom_read_byte((unsigned char *) address);
+    eeprom_write_byte((unsigned char *) address, (this->logUniqueNumber > 250) ? (uint8_t)0x0 : this->logUniqueNumber + 1);
+    sdCardInited = initCard();
+    #endif
+
+    #if LOGGER_SERIAL
+    sdCardInited = true;
+    #endif
     return sdCardInited;
 }
 
@@ -322,25 +318,22 @@ void SDLogger::log(char * str, bool endOfLine)
         strcat(buffer, END_DELIMITER);
 
         //TODO: need refactoring
-        startWithNumber = (loggerType == LOGGER_SD_CARD);
+        startWithNumber = LOGGER_SD_CARD == 1;
 
 
         /**
          * Flush only if end of line
          */
-        if(loggerType == LOGGER_SD_CARD)
-        {
+        #if LOGGER_SD_CARD
             messagesCounter++;
             if(messagesCounter >= MESSAGES_COUNT_FLUSH)
             {
                 flush(buffer);
                 messagesCounter = 0;
             }
-        }
-        else
-        {
+        #else
             flush(buffer);
-        }
+        #endif
     }
 
 
@@ -348,33 +341,32 @@ void SDLogger::log(char * str, bool endOfLine)
 
 void SDLogger::flush(char * source)
 {
-    if(loggerType == LOGGER_SD_CARD)
-    {
+    #if LOGGER_SD_CARD
         #if DEBUG_ENABLE
         if(strlen(source) > BUFFER_SIZE)
         {
-            debug("Source is bigger than buffer size. DATA CORRUPTED");
+            debug(P("Source is bigger than buffer size. DATA CORRUPTED"));
         }
         #endif
         if(writeBlock(currentBlock, (uint8_t *)source, (uint8_t)strlen(source)))
         {
             currentBlock++;
         }
+        #if DEBUG_ENABLE
         else
         {
-            debug("Error writing to SD");
+            debug(P("Error writing to SD"));
         }
-    }
-    else if(loggerType == LOGGER_SERIAL)
-    {
+        #endif
+    #elif LOGGER_SERIAL
         Serial.print(source);
-    }
+    #endif
 
     source[0] = '\0';
 }
 
 
-void SDLogger::log(const char * columnName, float value, bool endOfLine)
+void SDLogger::log(int fieldId, float value, bool endOfLine)
 {
     if(!sdCardInited)
     {
@@ -384,12 +376,12 @@ void SDLogger::log(const char * columnName, float value, bool endOfLine)
 
     if(!columnNamesInited)
     {
-        String columnNameString = String(columnName);
+        String columnNameString = String(fieldId);
         if(isFirstColumn)
         {
             isFirstColumn = false;
             String header = String("Columns:");
-            header += columnName;
+            header += columnNameString;
             columnNameString = header;
         }
 

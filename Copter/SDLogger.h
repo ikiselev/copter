@@ -6,6 +6,7 @@
 
 #include "Arduino.h"
 #include "config.h"
+#include "SDLoggerFields.h"
 
 
 // SPI port
@@ -138,17 +139,16 @@ const int MESSAGES_COUNT_FLUSH = 3;
 
 class SDLogger {
 public:
-    boolean begin(uint8_t);
-    void log(const char * columnName, float value, bool endOfLine = false);
+    boolean begin();
+    void log(int fieldId, float value, bool endOfLine = false);
 
 
     SDLogger() :
-    startWithNumber((loggerType == LOGGER_SD_CARD)),
+    startWithNumber(LOGGER_SD_CARD == 1),
     columnNamesInited(false),
     sdCardInited(false),
     isFirstColumn(true),
-    currentBlock(1),
-    loggerType(LOGGER_NONE)
+    currentBlock(1)
     {
         char buffer[BUFFER_SIZE] = "";
         headerColumns = "";
@@ -162,7 +162,6 @@ public:
 
 private:
     boolean sdCardInited;
-    uint8_t loggerType;
     /**
      * Буфер для отправки на карту.
      * Данные записываются как только накопится SECTOR_SIZE байт
