@@ -217,6 +217,8 @@ private:
     void log(char * str, bool endOfLine = false);
 
     void flush(char * source);
+
+    void transmit(char const *string);
 };
 
 extern SDLogger Logger;

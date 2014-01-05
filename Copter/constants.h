@@ -4,8 +4,11 @@
 /**
  * Какой из типов включен
  */
-#define LOGGER_SD_CARD 1
+#define LOGGER_SD_CARD 0
 #define LOGGER_SERIAL 0
+#define LOGGER_NRF 1
+
+#define NRF_PAYLOAD 24
 
 
 #define DEBUG_ENABLE 1

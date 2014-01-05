@@ -8,6 +8,14 @@
 #include "config.h"
 
 
+#if LOGGER_NRF
+    #include <SPI.h>
+    #include <Mirf.h>
+    #include <nRF24L01.h>
+    #include <MirfHardwareSpiDriver.h>
+#endif
+
+
 /** Set SCK to max rate of F_CPU/2. See Sd2Card::setSckRate(). */
 uint8_t const SPI_FULL_SPEED = 0;
 /** Set SCK rate to F_CPU/4. See Sd2Card::setSckRate(). */
@@ -48,7 +56,57 @@ boolean SDLogger::begin()
     #if LOGGER_SERIAL
     sdCardInited = true;
     #endif
+
+    #if LOGGER_NRF
+        Mirf.spi = &MirfHardwareSpi;
+        Mirf.csnPin = 10;
+        Mirf.channel = 90;
+        Mirf.init();
+        Mirf.setRADDR((byte *)"c");
+
+        Mirf.payload = NRF_PAYLOAD;
+
+        Mirf.setTADDR((byte *)"s");
+        Mirf.config();
+
+        sdCardInited = true;
+    #endif
     return sdCardInited;
+}
+
+void SDLogger::transmit(const char *string)
+{
+    byte buf[NRF_PAYLOAD] = {'\0'};
+    int len = strlen(string);
+    len++; // for 0x00 byte
+
+    int chunks = 1;
+    int lastChunkChars = len;
+    if(len > NRF_PAYLOAD)
+    {
+        chunks = (int)ceil(len / NRF_PAYLOAD);
+        chunks++;
+        lastChunkChars = len - ((chunks - 1) * NRF_PAYLOAD);
+    }
+
+
+    for( int i=0 ; i < chunks; i++)
+    {
+        int cnt = NRF_PAYLOAD;
+        if(chunks - 1 == i)
+        {
+            cnt = lastChunkChars;
+        }
+        memcpy(buf, &string[i * NRF_PAYLOAD], (size_t)cnt);
+
+        if(chunks - 1 == i)
+        {
+            buf[lastChunkChars + 1] = '\0';
+        }
+
+        Mirf.send(buf);
+        while( Mirf.isSending() ) ;
+    }
 }
 
 boolean SDLogger::initCard()
@@ -360,6 +418,8 @@ void SDLogger::flush(char * source)
         #endif
     #elif LOGGER_SERIAL
         Serial.print(source);
+    #elif LOGGER_NRF
+        transmit(source);
     #endif
 
     source[0] = '\0';
