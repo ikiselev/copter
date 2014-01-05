@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>FLASH copy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>FLASH.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +28,11 @@
 			<true/>
 		</dict>
 		<key>ABA59DBF2E7F90446AB4E75A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D172822918743DB9006BAF9B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -13,6 +13,10 @@ USER_LIB_PATH  = $(wildcard $(ARDUINO_PATHER)/?ibraries)
 
 TOOLCHAIN_BIN_DIRECTORY = /usr/local/CrossPack-AVR/bin
 
+current_dir = $(notdir $(shell pwd))
+MAIN_ARDUINO_FILE ?= $(current_dir).ino
+
+
 #
 # CONSOLE OVERRIDE
 #
@@ -88,14 +92,13 @@ endif
 LOCAL_C_SRCS    ?= $(wildcard *.c)
 LOCAL_CPP_SRCS  ?= $(wildcard *.cpp)
 LOCAL_CC_SRCS   ?= $(wildcard *.cc)
-LOCAL_PDE_SRCS  ?= $(wildcard *.pde)
-LOCAL_INO_SRCS  ?= $(wildcard *.ino)
+LOCAL_INO_SRCS  ?= $(MAIN_ARDUINO_FILE)
 
 LOCAL_SRCS      = $(LOCAL_C_SRCS)   $(LOCAL_CPP_SRCS) \
-                $(LOCAL_CC_SRCS)   $(LOCAL_PDE_SRCS) \
+                $(LOCAL_CC_SRCS) \
                 $(LOCAL_INO_SRCS)
 LOCAL_OBJ_FILES = $(LOCAL_C_SRCS:.c=.o)   $(LOCAL_CPP_SRCS:.cpp=.o) \
-                $(LOCAL_CC_SRCS:.cc=.o)   $(LOCAL_PDE_SRCS:.pde=.o) \
+                $(LOCAL_CC_SRCS:.cc=.o) \
                 $(LOCAL_INO_SRCS:.ino=.o)
 LOCAL_OBJS      = $(patsubst %,$(OBJDIR)/%,$(LOCAL_OBJ_FILES))
 
@@ -105,8 +108,8 @@ endif
 
 
 # Ideally, this should just check if there are more than one file
-ifneq ($(words $(LOCAL_PDE_SRCS) $(LOCAL_INO_SRCS)), 1)
-    ifeq ($(words $(LOCAL_PDE_SRCS) $(LOCAL_INO_SRCS)), 0)
+ifneq ($(words $(LOCAL_INO_SRCS)), 1)
+    ifeq ($(words $(LOCAL_INO_SRCS)), 0)
         $(call show_config_info,No .pde or .ino files found. If you are compiling .c or .cpp files then you need to explicitly include Arduino header files)
     else
         #TODO: Support more than one file. https://github.com/sudar/Arduino-Makefile/issues/49
@@ -143,8 +146,8 @@ endif
 
 ifeq ($(strip $(NO_CORE)),)
     ifndef MONITOR_BAUDRATE
-        ifeq ($(words $(LOCAL_PDE_SRCS) $(LOCAL_INO_SRCS)), 1)
-            SPEED = $(shell egrep -h 'Serial.begin\([0-9]+\)' $(LOCAL_PDE_SRCS) $(LOCAL_INO_SRCS) | sed -e 's/[^0-9]//g'| head -n1)
+        ifeq ($(words $(LOCAL_INO_SRCS)), 1)
+            SPEED = $(shell egrep -h 'Serial.begin\([0-9]+\)' $(LOCAL_INO_SRCS) | sed -e 's/[^0-9]//g'| head -n1)
             MONITOR_BAUDRATE = $(findstring $(SPEED),300 1200 2400 4800 9600 14400 19200 28800 38400 57600 115200)
         endif
 
