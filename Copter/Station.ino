@@ -16,10 +16,17 @@ volatile bool allowSpin = false;
 
 unsigned long startSpin = 0;
 
-int speedUpTime = 5000;
-float speedStep = 1;
+//9 sec at all
+int speedUpTime = 2000;
+int spinTime = 7000;
+int speedDownTime = 1000;
+
+
+float speedStep;
+float speedStepDown;
+
 int minSpeed = 0;
-int maxSpeed = 255;
+int maxSpeed = 220;
 int currentSpeed = 0;
 
 
@@ -57,12 +64,14 @@ void setup(){
     Mirf.configRegister(CONFIG, 0x48);
     Mirf.config();
 
+    TCCR1B = (TCCR1B & 0xF8) | 1;
     pinMode(motorPin, OUTPUT);
 
     Serial.println("Listenting");
 
 
-    speedStep = (maxSpeed - minSpeed) / speedUpTime;
+    speedStep = (maxSpeed - minSpeed) / (float)speedUpTime;
+    speedStepDown = (maxSpeed - minSpeed) / (float)speedDownTime;
 
 
     attachInterrupt(1, receive, LOW);
@@ -72,7 +81,7 @@ void flushBuffer()
 {
     noInterrupts();
 
-        Serial.write(radioBuffer, bufferIndex);
+        //Serial.write(radioBuffer, bufferIndex);
         bufferIndex = 0;
 
     interrupts();
@@ -98,22 +107,32 @@ void loop()
     analogWrite(motorPin, getCentrifugeSpeed());
 }
 
-int getTimeSpinned()
+unsigned long getTimeSpinned()
 {
     return millis() - startSpin;
 }
 
 
 int getCentrifugeSpeed() {
-    int result = 0;
-    if(getTimeSpinned() < speedUpTime)
+    int result = minSpeed;
+    unsigned long timeSpinned = getTimeSpinned();
+
+    if(timeSpinned < speedUpTime)
     {
-        result = getTimeSpinned() * speedStep;
+        //Speed up
+        result = (int)(timeSpinned * speedStep);
         if(currentSpeed > maxSpeed) result = maxSpeed;
     }
-
-    //TODO: speed Down
-
+    else if(timeSpinned > speedUpTime && timeSpinned < speedUpTime + spinTime)
+    {
+        //just spin
+        result = maxSpeed;
+    }
+    else if(timeSpinned > speedUpTime + spinTime && timeSpinned < speedUpTime + spinTime + speedDownTime)
+    {
+        //Speed down
+        result = (int)(maxSpeed - ((timeSpinned - speedUpTime - spinTime) * speedStepDown));
+    }
 
     return result;
 }
