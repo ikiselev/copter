@@ -28,6 +28,8 @@ public:
         i = 0;
         d = 0;
         lastMillis = 0;
+
+        der_ch = 1;
     }
 
     float get_p(float error);
@@ -39,7 +41,7 @@ public:
 
     float p,i,d,s;
 
-    void Compute();
+    void Compute(int id, int gyro);
     void setLimits(float min, float max);
 
 
@@ -63,6 +65,10 @@ private:
     float _last_square;
     float _last_input;
     static float const _filter;
+
+    float der_ch;
+
+    float lastDimult = 1;
 
     void setCoefficients(float Kp, float Ki, float Kd);
 

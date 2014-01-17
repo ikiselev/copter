@@ -1,5 +1,7 @@
 #include "Arduino.h"
 #include "PID.h"
+#include "FuzzyDerivative.h"
+
 
 
 const float  PID::_filter = 25.0f;
@@ -52,6 +54,15 @@ float PID::get_d(float input, float dt)
         float RC = 1 / (2 * (float)PI * _filter);
         derivative = _last_derivative + ( ( dt / (RC + dt ) ) * (derivative - _last_derivative));
 
+        if(derivative > _last_derivative)
+        {
+            der_ch = -(float)sqrt(fabs(d));
+        }
+        else
+        {
+            der_ch = (float)sqrt(fabs(d));
+        }
+
         _last_derivative = derivative;
         _last_input = input;
 
@@ -96,7 +107,7 @@ void PID::setLimits(float min, float max)
     //*output = constrain(*output, limitMin, limitMax);
 }
 
-void PID::Compute()
+void PID::Compute(int id, int gyro)
 {
 
 
@@ -118,9 +129,15 @@ void PID::Compute()
     p = get_p(error);
     i = get_i(error, delta_time);
     d = get_d(error, delta_time);
-    s = get_s(error);
+    //s = get_s(error);
 
-    *output = p + i + d + s;
+
+    float Dmultipl = fuzzyDerivative.execute((float)fabs(error), (float)abs(gyro));
+
+    float k = 0.3;
+    Dmultipl = k * lastDimult + (1-k) * Dmultipl;
+    lastDimult = Dmultipl;
+    *output = p + i + d* Dmultipl + der_ch;
 
     *output = constrain(*output, limitMin, limitMax);
 }
