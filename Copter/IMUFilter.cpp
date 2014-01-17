@@ -1,7 +1,7 @@
 #include "IMUFilter.h"
+#include "SDLogger.h"
 /**
   * Straight DCM implementation based on FreeIMU
-  * TODO: fastRotations integral windup: realize gentlenav.googlecode.com/files/fastRotations.pdf
   *
   */
 
@@ -9,7 +9,6 @@
   * Initializes the quaternion
   */
 IMUFilter::IMUFilter() {
-    //TODO: make params for initialization, or predict by accel
     q0 = 0.0f;
     q1 = 1.0f; //Upside down
     q2 = 0.0f;
@@ -46,8 +45,9 @@ IMUFilter::IMUFilter() {
   */
 void IMUFilter::init() {
     accel.BMA180_Init();
-    accel.BMA180_SetBandwidth(BMA180_BANDWIDTH_20HZ);
-    accel.BMA180_SetRange(BMA180_RANGE_4G);
+    accel.BMA180_SetBandwidth(BMA180_BANDWIDTH_10HZ);
+    accel.BMA180_SetRange(BMA180_RANGE_2G);
+    accel.calibrateXY();
 
     delay(250);
     gyro.initGyro();
@@ -78,6 +78,27 @@ int IMUFilter::getGyroY()
 int IMUFilter::getGyroZ()
 {
     return gyro.g.z;
+}
+
+int IMUFilter::getAccX()
+{
+    return accel.a.x;
+}
+int IMUFilter::getAccY()
+{
+    return accel.a.y;
+}
+int IMUFilter::getAccZ()
+{
+    return accel.a.z;
+}
+int IMUFilter::getAccOffseetX()
+{
+    return accel.offsetXY[0];
+}
+int IMUFilter::getAccOffseetY()
+{
+    return accel.offsetXY[1];
 }
 
 /**
@@ -116,17 +137,72 @@ void IMUFilter::getQuaternion(float* q) {
   */
 void IMUFilter::getRPY(float* angles) {
     float q[4];
-    float gx, gy, gz;
 
     getQuaternion(q);
+    getAngles(angles, q);
+}
+
+
+void IMUFilter::getAngles(float* angles, float* q)
+{
+    float gx, gy, gz;
 
     gx = 2 * (q[1]*q[3] - q[0]*q[2]);
     gy = 2 * (q[0]*q[1] + q[2]*q[3]);
     gz = q[0]*q[0] - q[1]*q[1] - q[2]*q[2] + q[3]*q[3];
 
-    angles[0] = atan(gy / sqrt(gx*gx + gz*gz))  * 180/M_PI;
-    angles[1] = atan(gx / sqrt(gy*gy + gz*gz))  * 180/M_PI;
-    angles[2] = atan2(2 * q[1] * q[2] - 2 * q[0] * q[3], 2 * q[0]*q[0] + 2 * q[1] * q[1] - 1) * 180/M_PI;
+    angles[0] = (float)(atan(gy / sqrt(gx*gx + gz*gz))  * 180/M_PI);
+    angles[1] = (float)(atan(gx / sqrt(gy*gy + gz*gz))  * 180/M_PI);
+    angles[2] = (float)(atan2(2 * q[1] * q[2] - 2 * q[0] * q[3], 2 * q[0]*q[0] + 2 * q[1] * q[1] - 1) * 180/M_PI);
+}
+
+void IMUFilter::getRPYPredicted(float* angles, float *angleRot, int angularSpeed, int timeDiff)
+{
+
+    float rotationAngle = (angularSpeed / 1000.0f) * timeDiff;
+    if(fabs(rotationAngle) > 44.0) //TODO: magic-numbers
+    {
+        rotationAngle = lastRotationAngle;
+    }
+    lastRotationAngle = rotationAngle;
+    *angleRot = rotationAngle;
+    rotationAngle *= DEG_TO_RAD;
+
+    float rotatQ[4] = {(float)cos(rotationAngle / 2), 0, 0, (float)sin(rotationAngle/2)};
+
+    //IF USE COMPARSION between getRPY and getRPYPredicted, UNCOMMENT THIS line:
+    //float q[4] = {q0, q1, q2, q3};
+    float q[4] = {0};
+    getQuaternion(q);
+
+
+    float rotatedQ[4] = {0};
+    rotateQuaternion(rotatedQ, q, rotatQ);
+    getAngles(angles, rotatedQ);
+}
+
+void IMUFilter::rotateQuaternion(float* q, float* in, float* rotQ)
+{
+	float A=(in[0]+in[1])*(rotQ[0]+rotQ[1]);
+	float B=(in[3]-in[2])*(rotQ[2]-rotQ[3]);
+	float C=(in[1]-in[0])*(rotQ[2]+rotQ[3]);
+	float D=(in[2]+in[3])*(rotQ[1]-rotQ[0]);
+	float E=(in[1]+in[3])*(rotQ[1]+rotQ[2]);
+	float F=(in[1]-in[3])*(rotQ[1]-rotQ[2]);
+	float G=(in[0]+in[2])*(rotQ[0]-rotQ[3]);
+	float H=(in[0]-in[2])*(rotQ[0]+rotQ[3]);
+
+	q[0]= B + (-E - F + G + H) * 0.5f;
+	q[1]= A - ( E + F + G + H) * 0.5f;
+	q[2]= -C + ( E - F + G - H) * 0.5f;
+	q[3]= -D + ( E - F - G + H) * 0.5f;
+
+    // Normalise quaternion
+    float recipNorm = invSqrt(q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]);
+    q[0] *= recipNorm;
+    q[1] *= recipNorm;
+    q[2] *= recipNorm;
+    q[3] *= recipNorm;
 }
 
 
@@ -135,7 +211,7 @@ void IMUFilter::getRPY(float* angles) {
   */
 void IMUFilter::updateAHRS(float gx, float gy, float gz, float ax, float ay, float az) {
     float recipNorm;
-    float q0q0, q0q1, q0q2, q0q3, q1q1, q1q2, q1q3, q2q2, q2q3, q3q3;
+    float q0q0, q0q1, q0q2, q1q3, q2q3, q3q3;
     float halfex = 0.0f, halfey = 0.0f, halfez = 0.0f;
     float qa, qb, qc;
 
@@ -143,11 +219,7 @@ void IMUFilter::updateAHRS(float gx, float gy, float gz, float ax, float ay, flo
     q0q0 = q0 * q0;
     q0q1 = q0 * q1;
     q0q2 = q0 * q2;
-    q0q3 = q0 * q3;
-    q1q1 = q1 * q1;
-    q1q2 = q1 * q2;
     q1q3 = q1 * q3;
-    q2q2 = q2 * q2;
     q2q3 = q2 * q3;
     q3q3 = q3 * q3;
 

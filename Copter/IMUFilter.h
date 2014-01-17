@@ -19,6 +19,7 @@ class IMUFilter {
     unsigned long lastUpdate, now;        // sample period expressed in milliseconds
     float sampleFreq;                                // half the sample period expressed in seconds
     int startLoopTime;
+    float lastRotationAngle = 0;
 
 public:
     IMUFilter();
@@ -35,6 +36,21 @@ public:
     int getGyroY();
 
     int getGyroZ();
+
+    int getAccX();
+
+    int getAccY();
+
+    int getAccZ();
+
+    int getAccOffseetX();
+    int getAccOffseetY();
+
+    void getRPYPredicted(float *angles, float* angleRot, int angularSpeed, int timeDiff);
+
+    void rotateQuaternion(float *q, float *in, float *rotQ);
+
+    void getAngles(float *angles, float *q);
 };
 
 // inverted sqrt taken from quake3
