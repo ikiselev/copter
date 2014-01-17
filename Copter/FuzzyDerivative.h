@@ -72,7 +72,7 @@ class FuzzyDerivative
         {0, 25, 30, 40}, //OMEGA_LOW
         {30, 50, 60, 70}, //OMEGA_MID
         {65, 80, 100, 120}, //OMEGA_HIGH
-        {90, 130, 1020, 1020} //OMEGA_VHIGH
+        {90, 130, 2020, 2020} //OMEGA_VHIGH
     };
 
 
