@@ -74,6 +74,7 @@ boolean SDLogger::begin()
     return sdCardInited;
 }
 
+#if LOGGER_NRF
 void SDLogger::transmit(const char *string)
 {
     byte buf[NRF_PAYLOAD] = {'\0'};
@@ -82,24 +83,38 @@ void SDLogger::transmit(const char *string)
 
     int chunks = 1;
     int lastChunkChars = len;
+    bool fitInBounds = false;
+
     if(len > NRF_PAYLOAD)
     {
         chunks = (int)ceil(len / NRF_PAYLOAD);
         chunks++;
         lastChunkChars = len - ((chunks - 1) * NRF_PAYLOAD);
+
+        if(lastChunkChars == 0)
+        {
+            /**
+             * Пакет попадает в рамки, например
+             * 47 + 1 байт для 0x00 = 48
+             * palyload = 24
+             * то получится 3 пакета с мусором в 3. по-этому убираем его
+             */
+            chunks--;
+            fitInBounds = true;
+        }
     }
 
 
     for( int i=0 ; i < chunks; i++)
     {
         int cnt = NRF_PAYLOAD;
-        if(chunks - 1 == i)
+        if(!fitInBounds && chunks - 1 == i)
         {
             cnt = lastChunkChars;
         }
         memcpy(buf, &string[i * NRF_PAYLOAD], (size_t)cnt);
 
-        if(chunks - 1 == i)
+        if(!fitInBounds && chunks - 1 == i)
         {
             buf[lastChunkChars + 1] = '\0';
         }
@@ -108,6 +123,7 @@ void SDLogger::transmit(const char *string)
         while( Mirf.isSending() ) ;
     }
 }
+#endif
 
 boolean SDLogger::initCard()
 {

@@ -133,7 +133,7 @@ uint8_t const SD_CARD_TYPE_SDHC = 3;
 
 
 
-const int BUFFER_SIZE = 200;
+const int BUFFER_SIZE = 250;
 const int MESSAGES_COUNT_FLUSH = 3;
 
 
