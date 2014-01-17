@@ -16,12 +16,12 @@ struct Config
      * В миллисекундах
      * 0 - не выключаться
      */
-    static const uint32_t flightTime = 2000;
+    static const uint32_t flightTime = 4000;
     /**
      * Время постепенного взлета.
      * Время набирания оборотов с xSpeedStart до xSpeed
      */
-    static const uint32_t takeoffTime = 1500;
+    static const uint32_t takeoffTime = 3500;
 
     /**
      * Проверять ли напряжение на батарейке.
@@ -41,8 +41,8 @@ struct Config
      * Возможность задать силу тяги
      * От 0 до 255
      */
-    double xSpeed = 190;
-    double ySpeed = 190;
+    double xSpeed = 245;
+    double ySpeed = 245;
 
     double xSpeedStart = 55;
     double ySpeedStart = 55;
@@ -57,7 +57,7 @@ struct Config
      * TODO: Fail-safe
      * Отключение моторов, если угл наклона превысил допустимый предел
      */
-    static const int failsafeAngle = 90;
+    static const int failsafeAngle = 24;
 
 
     /**

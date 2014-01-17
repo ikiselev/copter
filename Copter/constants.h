@@ -4,15 +4,17 @@
 /**
  * Какой из типов включен
  */
-#define LOGGER_SD_CARD 0
+#define LOGGER_SD_CARD 1
 #define LOGGER_SERIAL 0
-#define LOGGER_NRF 1
+#define LOGGER_NRF 0
 
 #define NRF_PAYLOAD 24
 
 
 #define DEBUG_ENABLE 1
 #define DEBUG_SENSORS_ENABLE 0
+
+#define PREDICT_ACCEL_DIRECTION 0
 
 #ifdef MAIN_FILE
 char temp_buffer[40];
