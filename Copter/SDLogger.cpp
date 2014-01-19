@@ -269,7 +269,7 @@ void SDLogger::initSpi(void)
  * \return The value one, true, is returned for success and
  * the value zero, false, is returned for failure.
  */
-uint8_t SDLogger::writeBlock(uint32_t blockNumber, const uint8_t* src, uint8_t significantBytes) {
+uint8_t SDLogger::writeBlock(uint32_t blockNumber, const uint8_t* src, uint16_t significantBytes) {
 #if SD_PROTECT_BLOCK_ZERO
   // don't allow write to first block
   if (blockNumber == 0) {
@@ -306,7 +306,7 @@ uint8_t SDLogger::writeBlock(uint32_t blockNumber, const uint8_t* src, uint8_t s
 
 //------------------------------------------------------------------------------
 // send one block of data for write block or write multiple blocks
-uint8_t SDLogger::writeData(uint8_t token, const uint8_t* src, uint8_t significantBytes) {
+uint8_t SDLogger::writeData(uint8_t token, const uint8_t* src, uint16_t significantBytes) {
 
     // send data - optimized loop
     SPDR = token;
@@ -422,7 +422,7 @@ void SDLogger::flush(char * source)
             debug(P("Source is bigger than buffer size. DATA CORRUPTED"));
         }
         #endif
-        if(writeBlock(currentBlock, (uint8_t *)source, (uint8_t)strlen(source)))
+        if(writeBlock(currentBlock, (uint8_t *)source, (uint16_t)strlen(source)))
         {
             currentBlock++;
         }

@@ -133,7 +133,7 @@ uint8_t const SD_CARD_TYPE_SDHC = 3;
 
 
 
-const int BUFFER_SIZE = 250;
+const int BUFFER_SIZE = 320;
 const int MESSAGES_COUNT_FLUSH = 3;
 
 
@@ -208,9 +208,9 @@ private:
 
     boolean initCard();
 
-    uint8_t writeData(uint8_t token, uint8_t const *src, uint8_t significantBytes);
+    uint8_t writeData(uint8_t token, uint8_t const *src, uint16_t significantBytes);
 
-    uint8_t writeBlock(uint32_t blockNumber, uint8_t const *src, uint8_t significantBytes);
+    uint8_t writeBlock(uint32_t blockNumber, uint8_t const *src, uint16_t significantBytes);
 
     uint8_t type(void) const {return type_;}
 
@@ -219,6 +219,7 @@ private:
     void flush(char * source);
 
     void transmit(char const *string);
+
 };
 
 extern SDLogger Logger;
