@@ -79,9 +79,9 @@ float FuzzyDerivative::execute(float error, float omega)
             float val = (float)fmin(thruth_error[thruth_e_index], thruth_omega[thruth_o_index]);
 
 
-            if(val != 0)
+            if(val != 0 && val > Accumulation[i])
             {
-                Accumulation[i] = (float)fmax(Accumulation[i], val);
+                Accumulation[i] = val;
             }
         }
 
