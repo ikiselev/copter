@@ -14,6 +14,7 @@
 		ABA590BA1AE0EA6DA00B76F6 /* GSM3MobileServerProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA593AF67CC664E47B31376 /* GSM3MobileServerProvider.cpp */; };
 		ABA590D2EEBD6F41F76333E5 /* TFT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA591942D9AA95B7BB94255 /* TFT.cpp */; };
 		ABA590F4A185166CCC72BB74 /* Multiplexer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA59AC6D69BE19583E21F2F /* Multiplexer.cpp */; };
+		ABA591039BDDAC0A20AD8795 /* functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA5964F26208FDABD99E948 /* functions.cpp */; };
 		ABA5910534EA1C66A7C63AF8 /* GSM3ShieldV1ServerProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA59CAB4816E4923CDC5CBC /* GSM3ShieldV1ServerProvider.cpp */; };
 		ABA59108A5ECF89A577EC13D /* GSM3MobileNetworkRegistry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA5953BD02FFD1347E73D7B /* GSM3MobileNetworkRegistry.cpp */; };
 		ABA591207B4828719D6BE205 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = ABA595D8F33521AB7E1F2892 /* Makefile */; };
@@ -268,6 +269,7 @@
 		ABA5918306F55BC38B3D4781 /* eeprom_clear.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = eeprom_clear.ino; sourceTree = "<group>"; };
 		ABA591843A9E8C88D9B8739A /* communication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = communication.cpp; sourceTree = "<group>"; };
 		ABA59185B6EF2412A87F9B5C /* EsploraLedShow2.ino */ = {isa = PBXFileReference; lastKnownFileType = file.ino; path = EsploraLedShow2.ino; sourceTree = "<group>"; };
+		ABA5918624E4F4E4F34AC8C2 /* functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = functions.h; sourceTree = "<group>"; };
 		ABA5918733D80A93CD41B643 /* GSM3MobileMockupProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSM3MobileMockupProvider.h; sourceTree = "<group>"; };
 		ABA5918F0EDE6D0F220274D3 /* iotn24a.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iotn24a.h; sourceTree = "<group>"; };
 		ABA59190A8229A69082E09CB /* Caterina-Leonardo.hex */ = {isa = PBXFileReference; lastKnownFileType = file.hex; path = "Caterina-Leonardo.hex"; sourceTree = "<group>"; };
@@ -534,6 +536,7 @@
 		ABA5963DFE7BEC52EDBB3431 /* iom6450.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iom6450.h; sourceTree = "<group>"; };
 		ABA596460BE46956998204C7 /* parity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parity.h; sourceTree = "<group>"; };
 		ABA59646FD66CFBDDB58CD7D /* Udp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Udp.h; sourceTree = "<group>"; };
+		ABA5964F26208FDABD99E948 /* functions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = functions.cpp; sourceTree = "<group>"; };
 		ABA5964F749BAC3DE88E14B4 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		ABA59650313E234226AA1ACA /* GSM3ShieldV1MultiClientProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GSM3ShieldV1MultiClientProvider.cpp; sourceTree = "<group>"; };
 		ABA5965123A1EC0D243EF799 /* iousb162.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iousb162.h; sourceTree = "<group>"; };
@@ -2667,6 +2670,8 @@
 				ABA59FAF027F45F8EBAEDE96 /* FuzzyDerivative.h */,
 				ABA598B1BC3248E44565D450 /* SDLoggerFields.h */,
 				ABA59DC8AE09287ADE214CEF /* Station.ino */,
+				ABA5964F26208FDABD99E948 /* functions.cpp */,
+				ABA5918624E4F4E4F34AC8C2 /* functions.h */,
 			);
 			path = Copter;
 			sourceTree = "<group>";
@@ -4788,6 +4793,7 @@
 				ABA597035D22F953EE8D0795 /* petit_fatfs.cpp in Sources */,
 				ABA5945998BE1414DEDC2E34 /* PID_AutoTune_v0.cpp in Sources */,
 				ABA592AB74CFD23F6995CF1F /* Mirf.cpp in Sources */,
+				ABA591039BDDAC0A20AD8795 /* functions.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
