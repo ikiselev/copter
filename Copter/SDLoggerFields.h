@@ -24,6 +24,13 @@
 #define FIELD_X_ANGLE_PREDICT 15 //x_angle_predict{0;2}
 #define FIELD_Y_ANGLE_PREDICT 16 //y_angle_predict{0;2}
 #define FIELD_ANGLE_ROT_PREDICT 17 //angle_rotate_predict{0;2}
+#define FIELD_FUZZY_ERR 18 //fuzzy_error{0;90}
+#define FIELD_FUZZY_GYRO 19 //fuzzy_gyro{0;90}
+#define FIELD_FUZZY_RESULT 20 //fuzzy_result{0;2}
+#define FIELD_QUATERNION_W 21 //quaternion_w{-2;2}
+#define FIELD_QUATERNION_X 22 //quaternion_x{-2;2}
+#define FIELD_QUATERNION_Y 23 //quaternion_y{-2;2}
+#define FIELD_QUATERNION_Z 24 //quaternion_z{-2;2}
 
 
 #endif
